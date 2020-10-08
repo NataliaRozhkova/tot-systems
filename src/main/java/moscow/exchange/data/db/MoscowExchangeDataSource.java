@@ -12,8 +12,8 @@ import java.util.List;
 
 public abstract class MoscowExchangeDataSource <Entity> {
     private static final String URL = "jdbc:postgresql://localhost:5432/";
-    private static final String USER = "user1";
-    private static final String PASSWORD = "123";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "12Zoy03";
     private static final String DB_NAME = "moscow_exchange";
     private static final String DB_TABLE_SECURITY = "security";
     private static final String DB_TABLE_TRANSACTION = "transaction";
@@ -67,16 +67,6 @@ public abstract class MoscowExchangeDataSource <Entity> {
     public MoscowExchangeDataSource() {
         this.dataSource = initDataSource();
     }
-
-    public abstract Response<String> create(final Entity entity);
-
-    public abstract Response<String> delete(final long id);
-
-    public abstract Response<List<Entity>> readAll() ;
-
-    public abstract Response<List<Entity>> readAll(final HashMap<String, String> parameters);
-
-    public abstract Response<String> update(final long id, final Entity newEntity);
 
     public BasicDataSource getDataSource() {
         return dataSource;

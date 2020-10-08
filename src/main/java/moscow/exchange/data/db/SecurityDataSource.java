@@ -1,34 +1,31 @@
 package moscow.exchange.data.db;
 
 import moscow.exchange.data.Response;
+import moscow.exchange.data.db.dao.SecurityDAO;
 import moscow.exchange.data.entity.Security;
 
 import java.util.HashMap;
 import java.util.List;
 
-public class SecurityDataSource extends  MoscowExchangeDataSource<Security>{
-    @Override
+public class SecurityDataSource extends MoscowExchangeDataSource<Security> {
+
     public Response<String> create(Security security) {
-        return null;
+        return new SecurityDAO(getDataSource()).create(security);
     }
 
-    @Override
-    public Response<String> delete(long id) {
-        return null;
+    public Response<String> delete(int id) {
+        return new SecurityDAO(getDataSource()).delete(id);
     }
 
-    @Override
     public Response<List<Security>> readAll() {
-        return null;
+        return new SecurityDAO(this.getDataSource()).readAll();
     }
 
-    @Override
     public Response<List<Security>> readAll(HashMap<String, String> parameters) {
-        return null;
+        return new SecurityDAO(getDataSource()).readAll(parameters);
     }
 
-    @Override
-    public Response<String> update(long id, Security newEntity) {
-        return null;
+    public Response<String> update(int id, HashMap<String, String> newParameters) {
+        return new SecurityDAO(getDataSource()).update(id, newParameters);
     }
 }

@@ -20,7 +20,8 @@ public class Security {
     public final String marketPriceBoardId;
 
 
-    public Security(int id, String secId,
+    public Security(int id,
+                    String secId,
                     String shortname,
                     String regNumber,
                     String name,
@@ -52,6 +53,8 @@ public class Security {
         this.primaryBoardId = primaryBoardId;
         this.marketPriceBoardId = marketPriceBoardId;
     }
+
+
 
 
 }
