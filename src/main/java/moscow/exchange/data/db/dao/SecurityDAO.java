@@ -5,7 +5,6 @@ import moscow.exchange.data.entity.Security;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.jetbrains.annotations.NotNull;
 
-import javax.print.attribute.standard.MediaSize;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -79,8 +78,8 @@ public class SecurityDAO {
         try {
             connection = dbSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLCars.GET_ALL.QUERY);
-            ArrayList<Security> cars = mappingToSecurity(statement.executeQuery());
-            response = new Response<>(cars, Response.State.SUCCESS);
+            ArrayList<Security> securities = mappingToSecurity(statement.executeQuery());
+            response = new Response<>(securities, Response.State.SUCCESS);
         } catch (SQLException exception) {
             response = new Response<>(null, Response.State.ERROR);
         } finally {
@@ -112,7 +111,7 @@ public class SecurityDAO {
         return response;
     }
 
-    public Response<String> delete(@NotNull int id) {
+    public Response<String> delete(int id) {
         Connection connection = null;
         Response<String> response;
         try {
@@ -138,6 +137,32 @@ public class SecurityDAO {
         return response;
     }
 
+    public Response<String> update(int id, HashMap<String, String> newParameters) {
+        Connection connection = null;
+        Response<String> response;
+        try {
+            connection = dbSource.getConnection();
+            PreparedStatement statement = setStatementUpdate(connection, id, newParameters);
+            int result = statement.executeUpdate();
+            if (result == SUCCESS) {
+                response = new Response<>("Success", Response.State.SUCCESS);
+            } else if (result == ERROR) {
+                response = new Response<>("Object not found", Response.State.ERROR);
+            } else {
+                response = new Response<>("Error", Response.State.ERROR);
+            }
+
+        } catch (SQLException | NullPointerException exception) {
+            response = new Response<>("Error", Response.State.ERROR);
+        } finally {
+            if (connection != null) {
+                closeConnection(connection);
+            }
+        }
+        return response;
+    }
+
+
     private PreparedStatement setStatementPut(final Connection connection, final Security security) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(SQLCars.INSERT.QUERY);
         statement.setInt(tableColumn.get("id").columnNumber, security.id);
@@ -159,6 +184,24 @@ public class SecurityDAO {
         return statement;
     }
 
+    private PreparedStatement setStatementUpdate(final Connection connection, final int id, final HashMap<String, String> newParameters) throws SQLException {
+        StringBuilder statement = new StringBuilder();
+        statement.append("UPDATE security SET ");
+        for (String parameter : newParameters.keySet()) {
+            statement.append(parameter)
+                    .append(" = '")
+                    .append(newParameters.get(parameter))
+                    .append("', ");
+        }
+        statement.delete(statement.length() - 2, statement.length() - 1);
+        statement.append("WHERE id = ")
+                .append(id)
+                .append(";");
+
+        return connection.prepareStatement(statement.toString());
+
+    }
+
     private PreparedStatement setStatementGet(final Connection connection, final HashMap<String, String> parameters) throws SQLException {
         return connection.prepareStatement(generateSelectQuery(parameters));
     }
@@ -170,10 +213,10 @@ public class SecurityDAO {
             query.append(parameter)
                     .append(" = '")
                     .append(parameters.get(parameter))
-            .append("' and ");
+                    .append("' and ");
         }
-        query.delete(query.length() - 5, query.length() -1);
-        return  query.append(";").toString();
+        query.delete(query.length() - 5, query.length() - 1);
+        return query.append(";").toString();
     }
 
     private void closeConnection(Connection connection) {
