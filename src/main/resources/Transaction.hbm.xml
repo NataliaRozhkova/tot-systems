@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="moscow.exchange.data.entity.Transaction" table="transaction">
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+        <property name="boardId" column="boardid" type="string"/>
+        <property name="tradeDate" column="tradeDate" type="date"/>
+        <property name="shortName" column="shortname" type="string"/>
+        <one-to-one name="secId" class="moscow.exchange.data.entity.Security" cascade="save-update"/>
+        <property name="numTrades" column="numtrades" type="double"/>
+        <property name="value" column="value" type="double"/>
+        <property name="open" column="open" type="double"/>
+        <property name="low" column="low" type="double"/>
+        <property name="high" column="high" type="double"/>
+        <property name="legalClosePrice" column="legalcloseprice" type="double"/>
+        <property name="waPrice" column="waprice" type="int"/>
+        <property name="close" column="close" type="double"/>
+        <property name="volume" column="volume" type="double"/>
+        <property name="marketPrice2" column="marketprice2" type="double"/>
+        <property name="marketPrice3" column="marketprice3" type="double"/>
+        <property name="admittedQuote" column="admittedquote" type="double"/>
+        <property name="mp2valtrd" column="mp2valtrd" type="double"/>
+        <property name="marketPrice3TradesValue" column="marketprice3tradesvalue" type="double"/>
+        <property name="admittedValue" column="admittedvalue" type="double"/>
+        <property name="waval" column="waval" type="double"/>
+
+
+
+    </class>
+</hibernate-mapping>

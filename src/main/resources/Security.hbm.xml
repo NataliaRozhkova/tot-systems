@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="moscow.exchange.data.entity.Security" table="security">
+        <id name="id" type="int" column="id" />
+        <property name="secId" column="secid" type="string"/>
+        <property name="shortName" column="shortname" type="string"/>
+        <property name="regNumber" column="reg_number" type="string"/>
+        <property name="name" column="name" type="string"/>
+        <property name="isin" column="isin" type="string"/>
+        <property name="isTraded" column="is_traded" type="int"/>
+        <property name="emitentId" column="emitent_id" type="int"/>
+        <property name="emitentTitle" column="emitent_title" type="string"/>
+        <property name="emitentInn" column="emitent_inn" type="string"/>
+        <property name="emitentOkpo" column="emitent_okpo" type="string"/>
+        <property name="gosreg" column="gosreg" type="string"/>
+        <property name="type" column="type" type="string"/>
+        <property name="group" column="security_group" type="string"/>
+        <property name="primaryBoardId" column="primary_board_id" type="string"/>
+        <property name="marketPriceBoardId" column="marketprice_boardid" type="string"/>
+
+    </class>
+</hibernate-mapping>
