@@ -1,5 +1,7 @@
-package moscow.exchange.data.entity;
+package moscow.exchange.data.entity.parser;
 
+import moscow.exchange.data.entity.Security;
+import moscow.exchange.data.entity.Transaction;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -79,10 +81,11 @@ public class TransactionParser {
                 String wavalStr = attributes.getValue("WAVAL");
                 double waval = wavalStr != null && wavalStr.length() != 0 ? Double.parseDouble(wavalStr) : 0;
                 if (boardId != null) {
-                    transactionArrayList.add(new Transaction(boardId,
+                    transactionArrayList.add(new Transaction(0,
+                            boardId,
                             tradeDate,
                             shortName,
-                            secId,
+                            new Security(secId),
                             numTrades,
                             value,
                             open,

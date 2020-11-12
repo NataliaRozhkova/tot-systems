@@ -4,20 +4,20 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="moscow.exchange.data.entity.Transaction" table="transaction">
-        <id name = "id" type = "int" column = "id">
-            <generator class="native"/>
+        <id name = "id" type = "long" column = "id">
+            <generator class="identity"/>
         </id>
         <property name="boardId" column="boardid" type="string"/>
-        <property name="tradeDate" column="tradeDate" type="date"/>
+        <property name="tradeDate" column="tradeDate" type="string"/>
         <property name="shortName" column="shortname" type="string"/>
-        <one-to-one name="secId" class="moscow.exchange.data.entity.Security" cascade="save-update"/>
+        <many-to-one name="security"  column="secId"  class="moscow.exchange.data.entity.Security" not-null="true" lazy="false"/>
         <property name="numTrades" column="numtrades" type="double"/>
         <property name="value" column="value" type="double"/>
         <property name="open" column="open" type="double"/>
         <property name="low" column="low" type="double"/>
         <property name="high" column="high" type="double"/>
         <property name="legalClosePrice" column="legalcloseprice" type="double"/>
-        <property name="waPrice" column="waprice" type="int"/>
+        <property name="waPrice" column="waprice" type="double"/>
         <property name="close" column="close" type="double"/>
         <property name="volume" column="volume" type="double"/>
         <property name="marketPrice2" column="marketprice2" type="double"/>

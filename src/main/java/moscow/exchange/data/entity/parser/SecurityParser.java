@@ -1,5 +1,6 @@
-package moscow.exchange.data.entity;
+package moscow.exchange.data.entity.parser;
 
+import moscow.exchange.data.entity.Security;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -9,6 +10,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class SecurityParser {
@@ -37,6 +39,20 @@ public class SecurityParser {
         }
         return securityArrayList;
     }
+
+    public ArrayList<Security> parse(final InputStream stream) {
+        try {
+            parser.parse(stream, new XMLHandler());
+            stream.close();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return securityArrayList;
+    }
+
+
 
     private static class XMLHandler extends DefaultHandler {
 

@@ -1,0 +1,86 @@
+<html meta charset="UTF-8">
+<head>
+    <title>Московская биржа</title>
+
+</head>
+<script>
+
+    function submitForm() {
+        let secid = document.querySelector('#secid');
+        let shortname = document.querySelector('#shortname');
+        let regnumber = document.querySelector('#regnumber');
+        let name = document.querySelector('#name');
+        let isin = document.querySelector('#isin');
+        let is_traded = document.querySelector('#is_traded');
+        let emitent_id = document.querySelector('#emitent_id');
+        let emitent_title = document.querySelector('#emitent_title');
+        let emitent_inn = document.querySelector('#emitent_inn');
+        let emitent_okpo = document.querySelector('#emitent_okpo');
+        let gosreg = document.querySelector('#gosreg');
+        let type = document.querySelector('#type');
+        let group = document.querySelector('#group');
+        let primary_boardid = document.querySelector('#primary_boardid');
+        let marketprice_boardid = document.querySelector('#marketprice_boardid');
+
+        alert(marketprice_boardid.value);
+        let xhr = new XMLHttpRequest();
+        let url = 'http://localhost:8001/new';
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('Content-type', 'application/json;charset=utf-8');
+        var data = JSON.stringify({
+                    "secid": secid.value
+                    "shortname": shortname.value,
+                    "regnumber": regnumber.value,
+                    "name": name.value,
+                    "isin": isin.value,
+                    "is_traded": is_traded.value,
+                    "emitent_id": emitent_id.value,
+                    "emitent_title": emitent_title.value,
+                    "emitent_inn": emitent_inn.value,
+                    "emitent_okpo": emitent_okpo.value,
+                    "gosreg": gosreg.value,
+                    "type": type.value,
+                    "group": group.value,
+                    "primary_boardid": primary_boardid.value,
+                    "marketprice_boardid": marketprice_boardid.value
+
+                    });
+        xhr.onreadystatechange = function () {
+            if (xhr.status === 200 & xhr.readyState == 4) {
+                alert(this.responseText)
+            }
+        }
+         xhr.send(data);
+    }
+
+
+</script>
+<body>
+<div id="header">
+    <h1> Добавить информацию по ценной бумаге</h1>
+
+    <p><b>Ввести информацию по ценной бумаге</b><Br>
+    <p><input type="text" id="secid" placeholder="secid"> <Br>
+    <p><input type="text" id="shortname" placeholder="shortname"> <Br>
+    <p><input type="text" id="regnumber" placeholder="regnumber"> <Br>
+    <p><input type="text" id="name" pattern="^[а-яА-ЯёЁ0-9 ]+$" placeholder="name"> только кириллица, цифры и пробел<Br>
+    <p><input type="text" id="isin" placeholder="isin"><Br>
+    <p><input type="number" id="is_traded" placeholder="is_traded"><Br>
+    <p><input type="number" id="emitent_id" placeholder="emitent_id"><Br>
+    <p><input type="text" id="emitent_title" placeholder="emitent_title"><Br>
+    <p><input type="text" id="emitent_inn" placeholder="emitent_inn"><Br>
+    <p><input type="text" id="emitent_okpo" placeholder="emitent_okpo"><Br>
+    <p><input type="text" id="gosreg" placeholder="gosreg"><Br>
+    <p><input type="text" id="type" placeholder="type"><Br>
+    <p><input type="text" id="group" placeholder="group"><Br>
+    <p><input type="text" id="primary_boardid" placeholder="primary_boardid"> <Br>
+    <p><input type="text" id="marketprice_boardid" placeholder="marketprice_boardid"><Br>
+    <p>
+        <button onclick="submitForm()"> Submit</button>
+    </p>
+    <p class="result" style="color:blue"></p>
+
+
+</div>
+</body>
+</html>
