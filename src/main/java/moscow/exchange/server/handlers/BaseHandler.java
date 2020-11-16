@@ -15,10 +15,8 @@ public abstract class BaseHandler<T, K> implements HttpHandler {
         T requestParamValue = null;
         if ("GET".equals(httpExchange.getRequestMethod())) {
             requestParamValue = handleGetRequest(httpExchange);
-            System.out.println("GET");
         } else if ("POST".equals(httpExchange.getRequestMethod())) {
             requestParamValue = handlePostRequest(httpExchange);
-            System.out.println("POST");
         }
         handleResponse(httpExchange, presentResponse(requestRepository(requestParamValue)));
     }
