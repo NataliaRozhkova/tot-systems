@@ -5,7 +5,6 @@
 <hibernate-mapping>
     <class name="moscow.exchange.data.entity.Security" table="security">
         <id name="secId" type="string" column="secid" />
-        <property name="id" type="int" column="id" />
         <property name="shortName" column="shortname" type="string"/>
         <property name="regNumber" column="reg_number" type="string"/>
         <property name="name" column="name" type="string"/>

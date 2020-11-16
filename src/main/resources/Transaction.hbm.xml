@@ -10,7 +10,7 @@
         <property name="boardId" column="boardid" type="string"/>
         <property name="tradeDate" column="tradeDate" type="string"/>
         <property name="shortName" column="shortname" type="string"/>
-        <many-to-one name="security"  column="secId"  class="moscow.exchange.data.entity.Security" not-null="true" lazy="false"/>
+        <many-to-one name="security"  column="secId"  class="moscow.exchange.data.entity.Security" not-null="true" />
         <property name="numTrades" column="numtrades" type="double"/>
         <property name="value" column="value" type="double"/>
         <property name="open" column="open" type="double"/>
