@@ -5,7 +5,7 @@ import com.sun.net.httpserver.HttpHandler;
 
 import java.io.*;
 
-public class SecurityCreateServiceHandler implements HttpHandler {
+public class CreateSecurityServiceHandler implements HttpHandler {
     String htmlPage = getFile();
 
     @Override
@@ -32,8 +32,6 @@ public class SecurityCreateServiceHandler implements HttpHandler {
                 html.append(line).append("\n");
                 line = reader.readLine();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
