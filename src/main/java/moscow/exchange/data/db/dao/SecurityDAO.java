@@ -2,14 +2,12 @@ package moscow.exchange.data.db.dao;
 
 import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Security;
-import moscow.exchange.data.entity.Transaction;
 import org.hibernate.Session;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SecurityDAO {
@@ -27,6 +25,8 @@ public class SecurityDAO {
             session.save(security);
             session.getTransaction().commit();
             response = new Response<>("Success", Response.State.SUCCESS);
+        } catch (IllegalArgumentException ex) {
+            response = new Response<>(ex.getMessage(), Response.State.ERROR);
         } catch (PersistenceException e) {
             response = new Response<>(e.getCause().getCause().getMessage(), Response.State.ERROR);
         } finally {
@@ -82,7 +82,7 @@ public class SecurityDAO {
             Security security = session.get(Security.class, secId);
             session.getTransaction().commit();
             if (security == null) {
-                response = new Response<>(security, Response.State.ERROR);
+                response = new Response<>(null, Response.State.ERROR);
             } else {
                 response = new Response<>(security, Response.State.SUCCESS);
             }

@@ -1,20 +1,12 @@
 package moscow.exchange.data.db.dao;
 
 import moscow.exchange.data.Response;
-import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.entity.Transaction;
-import moscow.exchange.data.entity.parser.SecurityParser;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.TransientPropertyValueException;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
-import java.io.IOException;
-import java.io.PushbackInputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +27,7 @@ public class TransactionDAO {
             response = new Response<>("Success", Response.State.SUCCESS);
         } catch (TransientPropertyValueException e) {
 
-                response = new Response<>("Security not found", Response.State.ERROR);
+            response = new Response<>("Security not found", Response.State.ERROR);
 
         } catch (PersistenceException e) {
             response = new Response<>(e.getMessage(), Response.State.ERROR);
@@ -49,9 +41,10 @@ public class TransactionDAO {
     public Response<List<Transaction>> readAll() {
         session.beginTransaction();
         Response<List<Transaction>> response;
-        List<Transaction> transactions;
         try {
-            transactions = session.createQuery("FROM Transaction").list();
+            List<Transaction> transactions = session
+                    .createQuery("SELECT i FROM Transaction i JOIN FETCH i.security", Transaction.class)
+                    .list();
             response = new Response<>(transactions, Response.State.SUCCESS);
             session.getTransaction().commit();
         } catch (PersistenceException e) {
@@ -61,15 +54,18 @@ public class TransactionDAO {
         }
         return response;
     }
+
+//
 
     public Response<List<Transaction>> readWithSortParameters(String sortParameter) {
         session.beginTransaction();
-        StringBuilder query = new StringBuilder("FROM Transaction ");
-        query.append("ORDER BY ")
-                .append(sortParameter);
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT i FROM Transaction i JOIN FETCH i.security")
+                .append(" ORDER BY ")
+                .append("i." + sortParameter);
         Response<List<Transaction>> response;
         try {
-            List<Transaction> transactions = session.createQuery(query.toString()).list();
+            List<Transaction> transactions = session.createQuery(query.toString(), Transaction.class).list();
             response = new Response<>(transactions, Response.State.SUCCESS);
             session.getTransaction().commit();
         } catch (PersistenceException e) {
@@ -80,13 +76,14 @@ public class TransactionDAO {
         return response;
     }
 
-    public Response<List<Transaction>> readWithFilterParameter(String value) {
+    public Response<List<Transaction>> readWithFilterParameter(String parameter, String value) {
         session.beginTransaction();
-        Query query = session.createQuery(
-                "FROM Transaction  WHERE tradedate = :tradedate "
-        )
-                .setParameter("tradedate", value);
-        ArrayList<Transaction> transactions = (ArrayList<Transaction>) query.getResultList();
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT i FROM Transaction i JOIN FETCH i.security")
+                .append(" WHERE ")
+                .append("i." + parameter + " = \'")
+                .append(value + "\'");
+        ArrayList<Transaction> transactions = (ArrayList<Transaction>) session.createQuery(query.toString(), Transaction.class).getResultList();
         session.close();
         return new Response<>(transactions, Response.State.SUCCESS);
 
@@ -95,8 +92,13 @@ public class TransactionDAO {
     public Response<Transaction> readById(long id) {
         session.beginTransaction();
         Response<Transaction> response;
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT i FROM Transaction i JOIN FETCH i.security")
+                .append(" WHERE ")
+                .append("i.id = " + id);
         try {
-            Transaction transaction = session.get(Transaction.class, id);
+            List<Transaction> transactions = session.createQuery(query.toString(), Transaction.class).getResultList();
+            Transaction transaction = transactions.isEmpty() ? null : transactions.get(0);
             session.getTransaction().commit();
             response = new Response<>(transaction, Response.State.SUCCESS);
         } catch (PersistenceException e) {
