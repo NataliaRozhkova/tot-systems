@@ -5,8 +5,6 @@ import com.sun.net.httpserver.HttpHandler;
 import moscow.exchange.data.Response;
 import moscow.exchange.data.repository.Repository;
 
-import java.io.IOException;
-
 public class DeleteSecurityHandler extends BaseHandler<String, String> implements HttpHandler {
 
     public DeleteSecurityHandler(Repository repository) {
