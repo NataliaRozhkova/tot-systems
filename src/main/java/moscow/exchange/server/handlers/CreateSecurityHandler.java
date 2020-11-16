@@ -1,9 +1,10 @@
 package moscow.exchange.server.handlers;
 
+import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import moscow.exchange.data.Response;
-import moscow.exchange.data.entity.converter.SecurityJSONConverter;
+import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.repository.Repository;
 
 import java.io.IOException;
@@ -19,28 +20,25 @@ public class CreateSecurityHandler extends BaseHandler<String, String> implement
 
     @Override
     String handlePostRequest(HttpExchange httpExchangeParameters) throws IOException {
-        System.out.println("!!!!!!!!!!!!!!!!!!");
-
         InputStream stream = httpExchangeParameters.getRequestBody();
-        StringBuilder json = new StringBuilder();
-        int jsonByte;
-        while ((jsonByte = stream.read()) != -1) {
-            json.append((char) jsonByte);
-        }
+        String json = new String(stream.readAllBytes());
         stream.close();
-        System.out.println(json.toString());
-
-        return json.toString();
+        return json;
     }
 
     @Override
-    String handleGetRequest(HttpExchange httpExchangeParameters)  {
+    String handleGetRequest(HttpExchange httpExchangeParameters) {
         return null;
     }
 
     @Override
     Response<String> requestRepository(String requestParameter) {
-        return repository.createSecurity(SecurityJSONConverter.deserialize(requestParameter));
+        Security security = new Gson().fromJson(requestParameter, Security.class);
+
+
+        return security.getName().matches("^[а-яА-ЯёЁ0-9 ]+$") ?
+                repository.createSecurity(security) :
+                new Response<>(" Error \n В поле name могут быть только кириллица, цифры и пробел", Response.State.ERROR);
     }
 
     @Override
