@@ -13,19 +13,20 @@ public class ExchangeHttpServer {
     final String host;
     final int port;
     final HttpServer server;
-    private Repository repository ;
 
     public ExchangeHttpServer(String host, int port, Repository repository) throws IOException {
         this.host = host;
         this.port = port;
-        this.repository = repository;
         server = HttpServer.create(new InetSocketAddress(host, port), 0);
         server.createContext("/", new StartServiceHandler());
         server.createContext("/security", new SecurityHandler());
         server.createContext("/security/read", new GetSecurityHandler(repository));
         server.createContext("/security/history", new GetSecurityHistoryHandler(repository));
-        server.createContext("/security/add", new SecurityCreateServiceHandler());
-        server.createContext("/new", new CreateSecurityHandler(repository));
+        server.createContext("/security/add", new CreateSecurityServiceHandler());
+        server.createContext("/security/add/new", new CreateSecurityHandler(repository));
+        server.createContext("/security/update", new UpdateSecurityServiceHandler(repository));
+        server.createContext("/security/update/parameters", new UpdateSecurityHandler(repository));
+        server.createContext("/security/delete", new DeleteSecurityHandler(repository));
         server.setExecutor(Executors.newFixedThreadPool(10));
     }
 
