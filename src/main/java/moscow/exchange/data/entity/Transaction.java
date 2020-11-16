@@ -1,74 +1,89 @@
 package moscow.exchange.data.entity;
 
 import com.fasterxml.jackson.annotation.*;
+import com.google.gson.annotations.SerializedName;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "row")
-@JsonRootName("transaction")
-@JsonPropertyOrder({"id", "board_id", "trade_date", "short_name", "secid",
-        "num_trades", "value", "open", "low", "high", "legal_close_price",
-        "wa_price", "close", "volume", "market_price_2", "market_price_3",
-        "admitted_quote", "mp_2_val_trd", "market_price_3_trades_value", "admitted_value", "wa_val"})
-
 
 public class Transaction {
 
-    @JsonProperty("id")
+    //    private long id;
+//    private String boardId;
+//    private String tradeDate;
+//    private String shortName;
+//    private transient Security security;
+//    private String secId;
+//    private double numTrades;
+//    private double value;
+//    private double open;
+//    private double low;
+//    private double high;
+//    private double legalClosePrice;
+//    private double waPrice;
+//    private double close;
+//    private double volume;
+//    private double marketPrice2;
+//    private double marketPrice3;
+//    private double admittedQuote;
+//    private double mp2valtrd;
+//    private double marketPrice3TradesValue;
+//    private double admittedValue;
+//    private double waval;
+    @SerializedName("id")
     private long id;
-    @JsonProperty("board_id")
+    @SerializedName("board_id")
     private String boardId;
-    @JsonProperty("trade_date")
+    @SerializedName("trade_date")
     private String tradeDate;
-    @JsonProperty("short_name")
+    @SerializedName("shortname")
     private String shortName;
-    @JsonIgnore
-    private Security security;
-    @JsonProperty("secid")
+    private transient Security security;
+    @SerializedName("secid")
     private String secId;
-    @JsonProperty("num_trades")
+    @SerializedName("num_trades")
     private double numTrades;
-    @JsonProperty("value")
+    @SerializedName("value")
     private double value;
-    @JsonProperty("open")
+    @SerializedName("open")
     private double open;
-    @JsonProperty("low")
+    @SerializedName("low")
     private double low;
-    @JsonProperty("high")
+    @SerializedName("high")
     private double high;
-    @JsonProperty("legal_close_price")
+    @SerializedName("legal_close_price")
     private double legalClosePrice;
-    @JsonProperty("wa_price")
+    @SerializedName("wa_price")
     private double waPrice;
-    @JsonProperty("close")
+    @SerializedName("close")
     private double close;
-    @JsonProperty("volume")
+    @SerializedName("volume")
     private double volume;
-    @JsonProperty("market_price_2")
+    @SerializedName("market_price_2")
     private double marketPrice2;
-    @JsonProperty("market_price_3")
+    @SerializedName("market_price_3")
     private double marketPrice3;
-    @JsonProperty("admitted_quote")
+    @SerializedName("admitted_quote")
     private double admittedQuote;
-    @JsonProperty("mp_2_val_trd")
+    @SerializedName("mp_2_val_trd")
     private double mp2valtrd;
-    @JsonProperty("market_price_3_trades_value")
+    @SerializedName("market_price_3_trades_value")
     private double marketPrice3TradesValue;
-    @JsonProperty("admitted_value")
+    @SerializedName("admitted_value")
     private double admittedValue;
-    @JsonProperty("wa_val")
+    @SerializedName("wa_val")
     private double waval;
 
     public Transaction() {
     }
 
-    @JsonCreator
     public Transaction(long id,
                        String boardId,
                        String tradeDate,
                        String shortName,
-                       Security security,
+                       String secId,
                        double numTrades,
                        double value,
                        double open,
@@ -89,7 +104,7 @@ public class Transaction {
         this.boardId = boardId;
         this.tradeDate = tradeDate;
         this.shortName = shortName;
-        this.security = security;
+        this.secId = secId;
         this.numTrades = numTrades;
         this.value = value;
         this.open = open;
@@ -106,7 +121,8 @@ public class Transaction {
         this.marketPrice3TradesValue = marketPrice3TradesValue;
         this.admittedValue = admittedValue;
         this.waval = waval;
-        this.secId = security.getSecId();
+        this.security = new Security(secId);
+
     }
 
     public Security getSecurity() {
@@ -308,32 +324,32 @@ public class Transaction {
     }
 
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj) {
         if (!(obj instanceof Transaction)) {
             return false;
         }
         return this.id == ((Transaction) obj).id &&
-        this.boardId.equals(((Transaction) obj).boardId)&&
-        this.tradeDate.equals(((Transaction) obj).tradeDate)&&
-        this.shortName.equals(((Transaction) obj).shortName)&&
-        this.security.equals(((Transaction) obj).secId)&&
-        this.numTrades == ((Transaction) obj).numTrades &&
-        this.value== ((Transaction) obj).value &&
-        this.open== ((Transaction) obj).open &&
-        this.low== ((Transaction) obj).low &&
-        this.high== ((Transaction) obj).high &&
-        this.legalClosePrice== ((Transaction) obj).legalClosePrice &&
-        this.waPrice== ((Transaction) obj).waPrice &&
-        this.close== ((Transaction) obj).close &&
-        this.volume== ((Transaction) obj).volume &&
-        this.marketPrice2== ((Transaction) obj).marketPrice2 &&
-        this.marketPrice3== ((Transaction) obj).marketPrice3 &&
-        this.admittedQuote== ((Transaction) obj).admittedQuote &&
-        this.mp2valtrd== ((Transaction) obj).mp2valtrd &&
-        this.marketPrice3TradesValue== ((Transaction) obj).marketPrice3TradesValue &&
-        this.admittedValue== ((Transaction) obj).admittedValue &&
-        this.waval== ((Transaction) obj).waval &&
-        this.secId.equals(((Transaction) obj).secId);
+                this.boardId.equals(((Transaction) obj).boardId) &&
+                this.tradeDate.equals(((Transaction) obj).tradeDate) &&
+                this.shortName.equals(((Transaction) obj).shortName) &&
+                this.security.equals(((Transaction) obj).secId) &&
+                this.numTrades == ((Transaction) obj).numTrades &&
+                this.value == ((Transaction) obj).value &&
+                this.open == ((Transaction) obj).open &&
+                this.low == ((Transaction) obj).low &&
+                this.high == ((Transaction) obj).high &&
+                this.legalClosePrice == ((Transaction) obj).legalClosePrice &&
+                this.waPrice == ((Transaction) obj).waPrice &&
+                this.close == ((Transaction) obj).close &&
+                this.volume == ((Transaction) obj).volume &&
+                this.marketPrice2 == ((Transaction) obj).marketPrice2 &&
+                this.marketPrice3 == ((Transaction) obj).marketPrice3 &&
+                this.admittedQuote == ((Transaction) obj).admittedQuote &&
+                this.mp2valtrd == ((Transaction) obj).mp2valtrd &&
+                this.marketPrice3TradesValue == ((Transaction) obj).marketPrice3TradesValue &&
+                this.admittedValue == ((Transaction) obj).admittedValue &&
+                this.waval == ((Transaction) obj).waval &&
+                this.secId.equals(((Transaction) obj).secId);
     }
 
     @Override
@@ -344,7 +360,8 @@ public class Transaction {
 
     public String toString() {
         StringBuilder transactionString = new StringBuilder();
-        transactionString.append(boardId).append("\t")
+        transactionString.append(id).append("\t")
+                .append(boardId).append("\t")
                 .append(tradeDate).append("\t")
                 .append(shortName).append("\t")
                 .append(security).append("\t")

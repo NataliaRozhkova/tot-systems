@@ -53,7 +53,6 @@ public class SecurityParser {
     }
 
 
-
     private static class XMLHandler extends DefaultHandler {
 
         @Override
@@ -92,8 +91,7 @@ public class SecurityParser {
                 String marketPriceBoardId = attributes.getValue("marketprice_boardid");
 
 
-                securityArrayList.add(new Security(id,
-                        secId,
+                securityArrayList.add(new Security(secId,
                         shortname,
                         regNumber,
                         name,

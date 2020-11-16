@@ -85,7 +85,7 @@ public class TransactionParser {
                             boardId,
                             tradeDate,
                             shortName,
-                            new Security(secId),
+                            secId,
                             numTrades,
                             value,
                             open,

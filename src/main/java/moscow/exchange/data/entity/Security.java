@@ -1,56 +1,46 @@
 package moscow.exchange.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-
-@JsonRootName("security")
-@JsonPropertyOrder({"id", "secid", "short_name", "regnumber", "name", "isin", "is_traded",
-        "emitent_id", "emitent_title", "emitent_inn", "emitent_okpo", "gosreg", "type",
-        "group", "primary_boardid", "marketprice_boardid", "history"})
 public class Security {
 
-    @JsonProperty("id")
-    private int id;
-    @JsonProperty("secid")
+    @SerializedName("secid")
     private String secId;
-    @JsonProperty("short_name")
+    @SerializedName("shortname")
     private String shortName;
-    @JsonProperty("regnumber")
+    @SerializedName("regnumber")
     private String regNumber;
-    @JsonProperty("name")
+    @SerializedName("name")
     private String name;
-    @JsonProperty("isin")
+    @SerializedName("isin")
     private String isin;
-    @JsonProperty("is_traded")
+    @SerializedName("is_traded")
     private int isTraded;
-    @JsonProperty("emitent_id")
+    @SerializedName("emitent_id")
     private int emitentId;
-    @JsonProperty("emitent_title")
+    @SerializedName("emitent_title")
     private String emitentTitle;
-    @JsonProperty("emitent_inn")
+    @SerializedName("emitent_inn")
     private String emitentInn;
-    @JsonProperty("emitent_okpo")
+    @SerializedName("emitent_okpo")
     private String emitentOkpo;
-    @JsonProperty("gosreg")
+    @SerializedName("gosreg")
     private String gosreg;
-    @JsonProperty("type")
+    @SerializedName("type")
     private String type;
-    @JsonProperty("group")
+    @SerializedName("group")
     private String group;
-    @JsonProperty("primary_boardid")
+    @SerializedName("primary_boardid")
     private String primaryBoardId;
-    @JsonProperty("marketprice_boardid")
+    @SerializedName("marketprice_boardid")
     private String marketPriceBoardId;
-    @JsonProperty("history")
+    @SerializedName("history")
     private List<Transaction> transactions;
 
-    public Security(int id,
-                    String secId,
+    public Security(String secId,
                     String shortname,
                     String regNumber,
                     String name,
@@ -65,7 +55,6 @@ public class Security {
                     String group,
                     String primaryBoardId,
                     String marketPriceBoardId) {
-        this.id = id;
         this.secId = secId;
         this.shortName = shortname;
         this.regNumber = regNumber;
@@ -84,8 +73,7 @@ public class Security {
     }
 
     @JsonCreator
-    public Security(int id,
-                    String secId,
+    public Security(String secId,
                     String shortname,
                     String regNumber,
                     String name,
@@ -101,7 +89,6 @@ public class Security {
                     String primaryBoardId,
                     String marketPriceBoardId,
                     List<Transaction> transactions) {
-        this.id = id;
         this.secId = secId;
         this.shortName = shortname;
         this.regNumber = regNumber;
@@ -122,7 +109,6 @@ public class Security {
     }
 
     public Security(String secId) {
-        this.id = 0;
         this.secId = secId;
         this.shortName = null;
         this.regNumber = null;
@@ -151,9 +137,7 @@ public class Security {
         return transactions;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public void setSecId(String secId) {
         this.secId = secId;
@@ -215,9 +199,6 @@ public class Security {
         this.marketPriceBoardId = marketPriceBoardId;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getSecId() {
         return secId;
@@ -284,8 +265,7 @@ public class Security {
         if (!(obj instanceof Security)) {
             return false;
         }
-        return this.id == ((Security) obj).id
-                && this.secId.equals(((Security) obj).secId)
+        return this.secId.equals(((Security) obj).secId)
                 && this.shortName.equals(((Security) obj).shortName)
                 && this.regNumber.equals(((Security) obj).regNumber)
                 && this.name.equals(((Security) obj).name)
@@ -306,7 +286,7 @@ public class Security {
     @Override
     public int hashCode() {
         final int prime = 31;
-        return prime * id + secId.hashCode() + shortName.hashCode() +
+        return secId.hashCode() + shortName.hashCode() +
                 regNumber.hashCode() +
                 name.hashCode() +
                 isin.hashCode() +
@@ -347,7 +327,6 @@ public class Security {
     public String toStringXml() {
         StringBuilder securityString = new StringBuilder();
         securityString.append("<tr>")
-                .append("<td>").append(id).append("</td>")
                 .append("<td>").append(secId).append("</td>")
                 .append("<td>").append(shortName).append("</td>")
                 .append("<td>").append(regNumber).append("</td>")
