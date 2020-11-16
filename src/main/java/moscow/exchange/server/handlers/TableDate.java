@@ -27,7 +27,6 @@ public class TableDate {
             "</tr>";
     public final static String SECURITY_TABLE_HEAD = "<table  border=\"1\"> "+
             "<tr>\n" +
-            "<th>id</th>\n" +
             "<th>secid</th>\n" +
             "<th>shortname </th>\n" +
             "<th>regnumber </th>\n" +
