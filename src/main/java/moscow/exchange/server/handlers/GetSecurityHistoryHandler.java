@@ -7,7 +7,6 @@ import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.entity.Transaction;
 import moscow.exchange.data.repository.Repository;
 
-import java.io.IOException;
 
 public class GetSecurityHistoryHandler extends BaseHandler<String, Security> implements HttpHandler {
 
@@ -18,10 +17,9 @@ public class GetSecurityHistoryHandler extends BaseHandler<String, Security> imp
     }
 
     @Override
-    String handleGetRequest(HttpExchange httpExchangeParameters) throws IOException {
+    String handleGetRequest(HttpExchange httpExchangeParameters) {
         String[] parameters = httpExchangeParameters.getRequestURI().getQuery().split("=");
-        String secidValue = parameters[1];
-        return secidValue;
+        return parameters[1];
     }
 
     @Override
@@ -41,7 +39,7 @@ public class GetSecurityHistoryHandler extends BaseHandler<String, Security> imp
         }
         StringBuilder history = new StringBuilder();
         Security security = response.body;
-        history.append("<h2>").append(security.getSecId() + " " + security.getName()).append("</h2>");
+        history.append("<h2>").append(security.getSecId() ).append(" ").append(security.getName()).append("</h2>");
 
         history.append(TableDate.TRANSACTION_TABLE_HEAD);
 
