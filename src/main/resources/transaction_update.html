@@ -28,7 +28,7 @@
         let admitted_value = document.querySelector('#admitted_value');
         let wa_val = document.querySelector('#wa_val');
         let xhr = new XMLHttpRequest();
-        let url = '/transaction/update/parameters';
+        let url = '/transaction/update';
         xhr.open("POST", url, true);
         xhr.setRequestHeader('Content-type', 'application/json;charset=utf-8');
         var data = JSON.stringify({"id": id.value == '' ? 0 : id.value, "board_id": board_id.value == '' ? 0 : board_id.value, "trade_date": trade_date.value == '' ? null : trade_date.value, "shortname": shortname.value == '' ? null : shortname.value, "secid": secid.value == '' ? null : secid.value, "num_trades": num_trades.value == '' ? 0 : num_trades.value, "value": value.value == '' ? 0 : value.value, "open": open.value == '' ? 0 : open.value, "low": low.value == '' ? 0 : low.value, "high": high.value == '' ? 0 : high.value, "legal_close_price": legal_close_price.value == '' ? 0 : legal_close_price.value, "wa_price": wa_price.value == '' ? 0 : wa_price.value, "close": close.value == '' ? 0 : close.value, "volume": volume.value == '' ? 0 : volume.value, "market_price_2": market_price_2.value == '' ? 0 : market_price_2.value, "market_price_3": market_price_3.value == '' ? 0 : market_price_3.value, "admitted_quote": admitted_quote.value == '' ? 0 : admitted_quote.value, "mp_2_val_trd": mp_2_val_trd.value == '' ? 0 : mp_2_val_trd.value, "market_price_3_trades_value": market_price_3_trades_value.value == '' ? 0 : market_price_3_trades_value.value, "admitted_value": admitted_value.value == '' ? 0 : admitted_value.value, "wa_val": wa_val.value == '' ? 0 : wa_val.value });         xhr.onreadystatechange = function () {

@@ -14,9 +14,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ExchangeDataSource {
@@ -33,10 +33,11 @@ public class ExchangeDataSource {
 
     public Response<String> createAllSecurities(final List<Security> securities) {
         StringBuilder response = new StringBuilder();
+        int count = 0;
         for (Security s : securities) {
-            response.append(createSecurity(s).body).append("\n");
+           if (createSecurity(s).state == Response.State.SUCCESS) count++;
         }
-        return new Response<>(response.toString(), Response.State.SUCCESS);
+        return new Response<>("Добавлено записей " + count, Response.State.SUCCESS);
     }
 
     public Response<Security> readSecurity(final String secId) {
@@ -55,16 +56,35 @@ public class ExchangeDataSource {
         return new SecurityDAO(sessionFactory.openSession()).update(security);
     }
 
-    public Response<String> createTransaction(final Transaction transaction) {
+    public Response<String> createTransaction(final Transaction transaction) throws IOException {
+        Security security = readSecurity(transaction.getSecId()).body;
+        if (security == null) {
+            URL url = new URL("https://iss.moex.com/iss/securities.xml?q=" + transaction.getSecId());
+            InputStream stream = url.openStream();
+            ArrayList<Security> securities = new SecurityParser().parse(stream);
+            stream.close();
+            createAllSecurities(securities);
+            security = readSecurity(transaction.getSecId()).body;
+        }
+        if (security == null && transaction.getSecId() == null) {
+            return  new Response<>("secid cannot be null", Response.State.ERROR);
+        }
+        if (security == null && transaction.getSecId() != null) {
+            return  new Response<>("security not found", Response.State.ERROR);
+        }
+        transaction.setSecurity(security);
         return new TransactionDAO(sessionFactory.openSession()).create(transaction);
     }
 
-    public Response<String> createAllTransaction(final List<Transaction> transactions) {
+    public Response<String> createAllTransaction(List<Transaction> transactions) throws IOException {
         StringBuilder response = new StringBuilder();
+        int count =0;
         for (Transaction t : transactions) {
-            response.append(createTransaction(t).body).append("\n");
+            if (createTransaction(t).state == Response.State.SUCCESS) {
+                count++;
+            }
         }
-        return new Response<>(response.toString(), Response.State.SUCCESS);
+        return new Response<>("Добавлено записей " + count, Response.State.SUCCESS);
     }
 
     public Response<Transaction> readTransaction(final long id) {
