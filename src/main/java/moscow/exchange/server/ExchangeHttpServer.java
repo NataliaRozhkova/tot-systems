@@ -28,6 +28,16 @@ public class ExchangeHttpServer {
         server.createContext("/security/update/parameters", new UpdateSecurityHandler(repository));
         server.createContext("/security/delete", new DeleteSecurityHandler(repository));
         server.createContext("/security/list", new GetListSecurityHandler(repository));
+        server.createContext("/transaction", new TransactionHandler());
+        server.createContext("/transaction/add", new CreateTransactionServiceHandler());
+        server.createContext("/transaction/add/new", new CreateTransactionHandler(repository));
+        server.createContext("/transaction/delete", new DeleteTransactionHandler(repository));
+        server.createContext("/transaction/update", new UpdateTransactionServiceHandler(repository));
+        server.createContext("/transaction/update/parameters", new UpdateTransactionHandler(repository));
+        server.createContext("/transaction/list", new GetListTransactionHandler(repository));
+        server.createContext("/pivot_table", new PivotTableServiceHandler());
+        server.createContext("/pivot_table/list", new PivotTableHandler(repository));
+
         server.setExecutor(Executors.newFixedThreadPool(10));
     }
 
