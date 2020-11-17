@@ -1,0 +1,43 @@
+<html meta charset="UTF-8">
+<head>
+    <title>Московская биржа</title>
+
+</head>
+
+<body>
+<div id="header">
+    <h1>Информация об истории операций по ценным бумагам Московской биржи</h1>
+    <p><a href="/transaction/add">Добавить новую операцию по ценной бумаге</a></p>
+
+    <form action="/security/history" method="get">
+        <p><b>Вывести все операции по ценной бумаге</b><Br>
+        <p><input type="text" name="secid">Ввести тикер<Br>
+        <p><input type="submit" value="Вывести"></p>
+    </form>
+
+    <form action="/transaction/update" method="get">
+        <p><b>Обновить информацию об операции по ценной бумаге</b><Br>
+        <p><input type="text" name="secid">Ввести тикер бумаги<Br>
+        <p><input type="submit" value="Обновить"></p>
+    </form>
+
+    <form action="/transaction/delete" method="get">
+        <p><b>Удалить операцию по ценной бумаге по номеру id</b><Br>
+        <p><input type="number" name="id">Ввести id операции <Br>
+        <p><input type="submit" value="Удалить"></p>
+    </form>
+
+    <form action="/transaction/list" method="get">
+        <p><b>Вывести список ценных бумаг</b><Br>
+        <p>Выберите параметр для сортировки:<Br>
+            <input type="radio" name="sort_parameter" value="id" > Id<Br>
+            <input type="radio" name="sort_parameter" value="secid" > Тикер (secid)<Br>
+            <input type="radio" name="sort_parameter" value="tradedate"> Дата операции<Br>
+        </p>
+        <p><input type="number" name="limit" value="10">Количество выводимых данных<Br>
+        <p><input type="number" name="offset" value="0">Начальный элемент</p>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+</div>
+</body>
+</html>
