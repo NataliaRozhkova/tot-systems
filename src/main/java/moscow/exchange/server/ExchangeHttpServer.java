@@ -27,6 +27,7 @@ public class ExchangeHttpServer {
         server.createContext("/security/update", new UpdateSecurityServiceHandler(repository));
         server.createContext("/security/update/parameters", new UpdateSecurityHandler(repository));
         server.createContext("/security/delete", new DeleteSecurityHandler(repository));
+        server.createContext("/security/list", new GetListSecurityHandler(repository));
         server.setExecutor(Executors.newFixedThreadPool(10));
     }
 
