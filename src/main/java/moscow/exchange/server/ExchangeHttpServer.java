@@ -22,21 +22,20 @@ public class ExchangeHttpServer {
         server.createContext("/security", new SecurityHandler());
         server.createContext("/security/read", new GetSecurityHandler(repository));
         server.createContext("/security/history", new GetSecurityHistoryHandler(repository));
-        server.createContext("/security/add", new CreateSecurityServiceHandler());
-        server.createContext("/security/add/new", new CreateSecurityHandler(repository));
-        server.createContext("/security/update", new UpdateSecurityServiceHandler(repository));
-        server.createContext("/security/update/parameters", new UpdateSecurityHandler(repository));
+        server.createContext("/security/add", new CreateSecurityHandler(repository));
+        server.createContext("/security/add/all", new CreateAllSecurityHandler(repository));
+        server.createContext("/security/update", new UpdateSecurityHandler(repository));
         server.createContext("/security/delete", new DeleteSecurityHandler(repository));
         server.createContext("/security/list", new GetListSecurityHandler(repository));
         server.createContext("/transaction", new TransactionHandler());
-        server.createContext("/transaction/add", new CreateTransactionServiceHandler());
-        server.createContext("/transaction/add/new", new CreateTransactionHandler(repository));
+        server.createContext("/transaction/add", new CreateTransactionHandler(repository));
+        server.createContext("/transaction/add/all", new CreateAllTransactionsHandler(repository));
         server.createContext("/transaction/delete", new DeleteTransactionHandler(repository));
-        server.createContext("/transaction/update", new UpdateTransactionServiceHandler(repository));
-        server.createContext("/transaction/update/parameters", new UpdateTransactionHandler(repository));
+        server.createContext("/transaction/update", new UpdateTransactionHandler(repository));
         server.createContext("/transaction/list", new GetListTransactionHandler(repository));
-        server.createContext("/pivot_table", new PivotTableServiceHandler());
-        server.createContext("/pivot_table/list", new PivotTableHandler(repository));
+        server.createContext("/pivot_table", new PivotTableHandler());
+        server.createContext("/pivot_table/list", new GetPivotTableHandler(repository));
+        server.createContext("/test", new TestHandler());
 
         server.setExecutor(Executors.newFixedThreadPool(10));
     }
