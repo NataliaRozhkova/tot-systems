@@ -1,0 +1,80 @@
+<html>
+<head><meta charset="utf-8">
+    <title>Московская биржа</title>
+
+</head>
+<script>
+
+    function submitForm() {
+        let id = document.querySelector('#id');
+        let board_id = document.querySelector('#board_id');
+        let trade_date = document.querySelector('#trade_date');
+        let shortname = document.querySelector('#shortname');
+        let secid = document.querySelector('#secid');
+        let num_trades = document.querySelector('#num_trades');
+        let value = document.querySelector('#value');
+        let open = document.querySelector('#open');
+        let low = document.querySelector('#low');
+        let high = document.querySelector('#high');
+        let legal_close_price = document.querySelector('#legal_close_price');
+        let wa_price = document.querySelector('#wa_price');
+        let close = document.querySelector('#close');
+        let volume = document.querySelector('#volume');
+        let market_price_2 = document.querySelector('#market_price_2');
+        let market_price_3 = document.querySelector('#market_price_3');
+        let admitted_quote = document.querySelector('#admitted_quote');
+        let mp_2_val_trd = document.querySelector('#mp_2_val_trd');
+        let market_price_3_trades_value = document.querySelector('#market_price_3_trades_value');
+        let admitted_value = document.querySelector('#admitted_value');
+        let wa_val = document.querySelector('#wa_val');
+        let xhr = new XMLHttpRequest();
+        let url = '/transaction/add/new';
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader('Content-type', 'application/json;charset=utf-8');
+        var data = JSON.stringify({"id": id.value == '' ? 0 : id.value, "board_id": board_id.value == '' ? 0 : board_id.value, "trade_date": trade_date.value == '' ? 0 : trade_date.value, "shortname": shortname.value == '' ? 0 : shortname.value, "secid": secid.value == '' ? 0 : secid.value, "num_trades": num_trades.value == '' ? 0 : num_trades.value, "value": value.value == '' ? 0 : value.value, "open": open.value == '' ? 0 : open.value, "low": low.value == '' ? 0 : low.value, "high": high.value == '' ? 0 : high.value, "legal_close_price": legal_close_price.value == '' ? 0 : legal_close_price.value, "wa_price": wa_price.value == '' ? 0 : wa_price.value, "close": close.value == '' ? 0 : close.value, "volume": volume.value == '' ? 0 : volume.value, "market_price_2": market_price_2.value == '' ? 0 : market_price_2.value, "market_price_3": market_price_3.value == '' ? 0 : market_price_3.value, "admitted_quote": admitted_quote.value == '' ? 0 : admitted_quote.value, "mp_2_val_trd": mp_2_val_trd.value == '' ? 0 : mp_2_val_trd.value, "market_price_3_trades_value": market_price_3_trades_value.value == '' ? 0 : market_price_3_trades_value.value, "admitted_value": admitted_value.value == '' ? 0 : admitted_value.value, "wa_val": wa_val.value == '' ? 0 : wa_val.value });         xhr.onreadystatechange = function () {
+            if (xhr.status === 200 & xhr.readyState == 4) {
+                alert(this.responseText)
+            }
+        }
+        alert(data)
+
+        xhr.send(data);
+
+    }
+
+</script>
+<body>
+<div id="header">
+    <h1> Добавить информацию об операции по ценной бумаге</h1>
+
+    <p><b>Ввести информацию по ценной бумаге</b><Br>
+    <p><input type="number" id="id" placeholder="id"><Br>
+    <p><input type="text" id="board_id" placeholder="board_id"><Br>
+    <p><input type="date" id="trade_date" placeholder="trade_date"><Br>
+    <p><input type="text" id="shortname" placeholder="shortname"><Br>
+    <p><input type="text" id="secid" placeholder="secid"><Br>
+    <p><input type="number" id="num_trades" placeholder="num_trades"><Br>
+    <p><input type="number" id="value" placeholder="value"><Br>
+    <p><input type="number" id="open" placeholder="open"><Br>
+    <p><input type="number" id="low" placeholder="low"><Br>
+    <p><input type="number" id="high" placeholder="high"><Br>
+    <p><input type="number" id="legal_close_price" placeholder="legal_close_price"><Br>
+    <p><input type="number" id="wa_price" placeholder="wa_price"><Br>
+    <p><input type="number" id="close" placeholder="close"><Br>
+    <p><input type="number" id="volume" placeholder="volume"><Br>
+    <p><input type="number" id="market_price_2" placeholder="market_price_2"><Br>
+    <p><input type="number" id="market_price_3" placeholder="market_price_3"><Br>
+    <p><input type="number" id="admitted_quote" placeholder="admitted_quote"><Br>
+    <p><input type="number" id="mp_2_val_trd" placeholder="mp_2_val_trd"><Br>
+    <p><input type="number" id="market_price_3_trades_value" placeholder="market_price_3_trades_value"><Br>
+    <p><input type="number" id="admitted_value" placeholder="admitted_value"><Br>
+    <p><input type="number" id="wa_val" placeholder="wa_val"><Br>
+    <p>
+        <button onclick="submitForm()"> Submit</button>
+    </p>
+    <p class="result" style="color:blue"></p>
+
+
+</div>
+</body>
+</html>
