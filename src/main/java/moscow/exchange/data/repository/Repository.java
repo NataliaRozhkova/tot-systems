@@ -2,21 +2,9 @@ package moscow.exchange.data.repository;
 
 import moscow.exchange.data.Response;
 import moscow.exchange.data.db.ExchangeDataSource;
-import moscow.exchange.data.db.dao.SecurityDAO;
-import moscow.exchange.data.db.dao.TransactionDAO;
 import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.entity.Transaction;
-import moscow.exchange.data.entity.parser.SecurityParser;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.Metadata;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Repository {
@@ -44,7 +32,7 @@ public class Repository {
     }
 
     public Response<String> deleteSecurity(final String secid) {
-        return deleteSecurity(secid);
+        return dataSource.deleteSecurity(secid);
     }
 
     public Response<String> updateSecurity(final Security security) {
@@ -75,16 +63,16 @@ public class Repository {
         return dataSource.updateTransaction(transaction);
     }
 
-    public Response<List<Transaction>> readTransactionWithSortParameter(String sortParameter) {
-        return dataSource.readTransactionWithSortParameter(sortParameter);
+    public Response<List<Transaction>> readTransactionWithSortParameter(String sortParameter, int limit, int offset) {
+        return dataSource.readTransactionWithSortParameter(sortParameter, limit, offset);
     }
 
-    public Response<List<Transaction>> readTransactionWithFilterParameter(String value) {
-        return dataSource.readTransactionWithFilterParameter(value);
+    public Response<List<Transaction>> readTransactionWithFilterParameter(String sortParameter, String filterParameter, String value, int limit, int offset) {
+        return dataSource.readTransactionWithFilterParameter(sortParameter, filterParameter,value,limit,offset);
     }
 
-    public Response<List<Security>> readSecurityWithSortParameter(String sortParameter) {
-        return dataSource.readSecurityWithSortParameter(sortParameter);
+    public Response<List<Security>> readSecurityWithSortParameter(String sortParameter, int limit, int offset) {
+        return dataSource.readSecurityWithSortParameter(sortParameter, limit, offset);
     }
 
     public Response<List<Security>> readSecurityWithFilterParameter(String value) {
