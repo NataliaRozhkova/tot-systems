@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class SecurityDAO {
