@@ -3,9 +3,7 @@ package moscow.exchange.server.handlers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import moscow.exchange.data.Response;
-import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.entity.Transaction;
-import moscow.exchange.data.entity.parser.SecurityParser;
 import moscow.exchange.data.entity.parser.TransactionParser;
 import moscow.exchange.data.repository.Repository;
 import moscow.exchange.server.FileReader;
@@ -15,7 +13,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CreateAllTransactionsHandler extends BaseHandler<String, String> implements HttpHandler {
 
