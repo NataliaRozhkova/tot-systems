@@ -55,17 +55,19 @@ public class TransactionDAO {
         return response;
     }
 
-//
 
-    public Response<List<Transaction>> readWithSortParameters(String sortParameter) {
+    public Response<List<Transaction>> readWithSortParameters(String sortParameter, int limit, int offset) {
         session.beginTransaction();
         StringBuilder query = new StringBuilder();
         query.append("SELECT i FROM Transaction i JOIN FETCH i.security")
-                .append(" ORDER BY ")
-                .append("i." + sortParameter);
+        .append(setSortParameter(sortParameter));
+
         Response<List<Transaction>> response;
         try {
-            List<Transaction> transactions = session.createQuery(query.toString(), Transaction.class).list();
+            List<Transaction> transactions = session.createQuery(query.toString(), Transaction.class)
+                    .setFirstResult(offset)
+                    .setMaxResults(limit)
+                    .getResultList();
             response = new Response<>(transactions, Response.State.SUCCESS);
             session.getTransaction().commit();
         } catch (PersistenceException e) {
@@ -76,17 +78,61 @@ public class TransactionDAO {
         return response;
     }
 
-    public Response<List<Transaction>> readWithFilterParameter(String parameter, String value) {
+    public Response<List<Transaction>> readWithFilterParameter(String sortParameter, String filterParameter, String value, int limit, int offset) {
         session.beginTransaction();
         StringBuilder query = new StringBuilder();
-        query.append("SELECT i FROM Transaction i JOIN FETCH i.security")
-                .append(" WHERE ")
-                .append("i." + parameter + " = \'")
-                .append(value + "\'");
-        ArrayList<Transaction> transactions = (ArrayList<Transaction>) session.createQuery(query.toString(), Transaction.class).getResultList();
+        query.append("SELECT i FROM Transaction i JOIN FETCH i.security");
+        query.append(setFilterParameter(filterParameter, value));
+        query.append(setSortParameter(sortParameter));
+
+        ArrayList<Transaction> transactions = (ArrayList<Transaction>) session.createQuery(query.toString(), Transaction.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
         session.close();
         return new Response<>(transactions, Response.State.SUCCESS);
 
+    }
+
+    private String setSortParameter(String sortParameter) {
+        if (sortParameter == null) {
+            return "";
+        }
+        switch (sortParameter) {
+            case "id":
+                return " ORDER BY i.id";
+            case "secid":
+                return " ORDER BY i.security.secId";
+            case "tradedate":
+                return " ORDER BY i.tradeDate";
+            case "open":
+                return " ORDER BY i.open";
+            case "close":
+                return " ORDER BY i.close";
+            case "numtrades":
+                return " ORDER BY i.numTrades";
+            case "regnumber":
+                return " ORDER BY i.security.regNumber";
+            case "name":
+                return " ORDER BY i.security.name";
+            case "emitent_title":
+                return " ORDER BY i.security.emitentTitle";
+            default:
+                return "";
+        }
+
+
+    }
+
+    private String setFilterParameter(String filterParameter, String value) {
+        if (filterParameter == null || value == null) {
+            return "";
+        }
+        if (filterParameter.equals("emitent_title")) {
+            return " WHERE i.security.emitentTitle  = \'" + value + "\'";
+        } else {
+            return " WHERE i.tradeDate = \'" + value + "\'";
+        }
     }
 
     public Response<Transaction> readById(long id) {
