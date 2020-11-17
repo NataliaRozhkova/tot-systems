@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ExchangeDataSource {
@@ -55,22 +56,7 @@ public class ExchangeDataSource {
     }
 
     public Response<String> createTransaction(final Transaction transaction) {
-        Response<String> response = new TransactionDAO(sessionFactory.openSession()).create(transaction);
-        if (response.body.equals("Security not found")) {
-            try {
-                URL url = new URL("https://iss.moex.com/iss/securities.xml?q=" + transaction.getSecId());
-                InputStream stream = url.openStream();
-                ArrayList<Security> security = new SecurityParser().parse(stream);
-                stream.close();
-                createAllSecurities(security);
-                new TransactionDAO(sessionFactory.openSession()).create(transaction);
-                response = new Response<>("Load new security from https://iss.moex.com", Response.State.SUCCESS);
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
-        }
-
-        return response;
+        return new TransactionDAO(sessionFactory.openSession()).create(transaction);
     }
 
     public Response<String> createAllTransaction(final List<Transaction> transactions) {
@@ -97,16 +83,16 @@ public class ExchangeDataSource {
         return new TransactionDAO(sessionFactory.openSession()).update(transaction);
     }
 
-    public Response<List<Transaction>> readTransactionWithSortParameter(String sortParameter) {
-        return new TransactionDAO(sessionFactory.openSession()).readWithSortParameters(sortParameter);
+    public Response<List<Transaction>> readTransactionWithSortParameter(String sortParameter, int limit, int offset) {
+        return new TransactionDAO(sessionFactory.openSession()).readWithSortParameters(sortParameter, limit, offset);
     }
 
-    public Response<List<Transaction>> readTransactionWithFilterParameter(String parameter, String value) {
-        return new TransactionDAO(sessionFactory.openSession()).readWithFilterParameter(parameter, value);
+    public Response<List<Transaction>> readTransactionWithFilterParameter(String sortParameter, String filterParameter, String value, int limit, int offset) {
+        return new TransactionDAO(sessionFactory.openSession()).readWithFilterParameter(sortParameter,filterParameter, value, limit, offset);
     }
 
-    public Response<List<Security>> readSecurityWithSortParameter(String sortParameter) {
-        return new SecurityDAO(sessionFactory.openSession()).readWithSortParameters(sortParameter);
+    public Response<List<Security>> readSecurityWithSortParameter(String sortParameter, int limit, int offset) {
+        return new SecurityDAO(sessionFactory.openSession()).readWithSortParameters(sortParameter, limit, offset);
     }
 
     public Response<List<Security>> readSecurityWithFilterParameter(String value) {
