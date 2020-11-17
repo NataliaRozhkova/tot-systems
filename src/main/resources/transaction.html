@@ -17,7 +17,7 @@
 
     <form action="/transaction/update" method="get">
         <p><b>Обновить информацию об операции по ценной бумаге</b><Br>
-        <p><input type="text" name="secid">Ввести тикер бумаги<Br>
+        <p><input type="number" name="secid">Ввести id операции<Br>
         <p><input type="submit" value="Обновить"></p>
     </form>
 
@@ -28,7 +28,7 @@
     </form>
 
     <form action="/transaction/list" method="get">
-        <p><b>Вывести список ценных бумаг</b><Br>
+        <p><b>Вывести все операции по ценным бумагам</b><Br>
         <p>Выберите параметр для сортировки:<Br>
             <input type="radio" name="sort_parameter" value="id" > Id<Br>
             <input type="radio" name="sort_parameter" value="secid" > Тикер (secid)<Br>

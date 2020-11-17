@@ -1,0 +1,41 @@
+<html meta charset="UTF-8">
+<head>
+    <title>Московская биржа</title>
+
+</head>
+
+<body>
+<div id="header">
+    <h1>Сводная таблица</h1>
+
+    <form action="/pivot_table/list" method="get">
+        <p><b>Вывести все операции по ценным бумагам</b><Br>
+        <p>Выберите параметр для сортировки:<Br>
+            <input type="radio" name="sort_parameter" value="secid" > secid<Br>
+            <input type="radio" name="sort_parameter" value="regnumber" > regnumber<Br>
+            <input type="radio" name="sort_parameter" value="name" > name<Br>
+            <input type="radio" name="sort_parameter" value="emitent_title" > emitent_title<Br>
+            <input type="radio" name="sort_parameter" value="tradedate" > tradedate<Br>
+            <input type="radio" name="sort_parameter" value="numtrades" > numtrades<Br>
+            <input type="radio" name="sort_parameter" value="open" > open<Br>
+            <input type="radio" name="sort_parameter" value="close" > close<Br>
+        </p>
+        <p>Выберите параметр для фильтрации:<Br>
+            <input type="radio" name="filter_parameter" value="emitent_title" > emitent_title<Br>
+            <input type="radio" name="filter_parameter" value="tradedate" > tradedate<Br>
+        </p>
+        <p><input type="text" name="filter_parameter_value" >Введите значение для параметра фильтрации<Br>
+
+
+
+        <p><input type="number" name="limit" value="10">Количество выводимых данных<Br>
+        <p><input type="number" name="offset" value="0">Начальный элемент</p>
+
+
+        <p><input type="submit" value="Submit"></p>
+
+
+    </form>
+</div>
+</body>
+</html>
