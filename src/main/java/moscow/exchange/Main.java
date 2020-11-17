@@ -1,12 +1,10 @@
 package moscow.exchange;
 
 import moscow.exchange.data.db.ExchangeDataSource;
-import moscow.exchange.data.entity.Transaction;
 import moscow.exchange.data.repository.Repository;
 import moscow.exchange.server.ExchangeHttpServer;
 
 import java.io.*;
-import java.util.List;
 
 public class Main {
 
