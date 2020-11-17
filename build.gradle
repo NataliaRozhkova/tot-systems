@@ -26,7 +26,9 @@ dependencies {
     compile 'org.hibernate:hibernate-core:5.4.22.Final'
     implementation 'org.hibernate:hibernate-core:5.4.22.Final'
 
-    
+    dependencies {
+        implementation 'com.google.code.gson:gson:2.8.6'
+    }
 
 
 
