@@ -5,6 +5,7 @@ import moscow.exchange.data.db.ExchangeDataSource;
 import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.entity.Transaction;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Repository {
@@ -39,11 +40,11 @@ public class Repository {
         return dataSource.updateSecurity(security);
     }
 
-    public Response<String> createTransaction(final Transaction transaction) {
+    public Response<String> createTransaction(final Transaction transaction) throws IOException {
         return dataSource.createTransaction(transaction);
     }
 
-    public Response<String> createAllTransaction(final List<Transaction> transactions) {
+    public Response<String> createAllTransaction(final List<Transaction> transactions) throws IOException {
         return dataSource.createAllTransaction(transactions);
     }
 

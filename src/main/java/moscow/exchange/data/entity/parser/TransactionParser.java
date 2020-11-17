@@ -11,6 +11,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class TransactionParser {
@@ -37,6 +38,22 @@ public class TransactionParser {
             e.printStackTrace();
         }
         return transactionArrayList;
+    }
+
+    public ArrayList<Transaction> parse(final InputStream stream) {
+        try {
+            parser.parse(stream, new TransactionParser.XMLHandler());
+            stream.close();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return transactionArrayList;
+    }
+
+    public static void removeArray() {
+        transactionArrayList.clear();
     }
 
     private static class XMLHandler extends DefaultHandler {
