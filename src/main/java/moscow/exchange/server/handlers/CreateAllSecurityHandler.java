@@ -54,7 +54,6 @@ public class CreateAllSecurityHandler extends BaseHandler<String, String> implem
     @Override
     Response<String> requestRepository(String requestParameter)  {
         List<Security> securities = new SecurityParser().parse(new File(requestParameter));
-        System.out.println(securities.get(0));
         return repository.createAllSecurities(securities);
     }
 

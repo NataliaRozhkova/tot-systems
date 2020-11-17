@@ -7,20 +7,47 @@ import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Transaction;
 import moscow.exchange.data.repository.Repository;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
-public class UpdateTransactionHandler extends BaseHandler<String, String> implements HttpHandler {
+public class UpdateTransactionHandler extends BaseHandler<String, Transaction> implements HttpHandler {
 
     private final Repository repository;
+
 
     public UpdateTransactionHandler(Repository repository) {
         this.repository = repository;
     }
 
     @Override
-    String handleGetRequest(HttpExchange httpExchangeParameters) {
-        return null;
+    public void handle(HttpExchange httpExchange) throws IOException {
+
+        String requestParamValue;
+        if ("GET".equals(httpExchange.getRequestMethod())) {
+            requestParamValue = handleGetRequest(httpExchange);
+            handleResponse(httpExchange, presentResponse(requestRepository(requestParamValue)));
+        } else if ("POST".equals(httpExchange.getRequestMethod())) {
+            requestParamValue = handlePostRequest(httpExchange);
+            handleResponse(httpExchange, (requestRepositoryToUpdateTransaction(requestParamValue)));
+
+        }
+    }
+
+    private String requestRepositoryToUpdateTransaction(String requestParamValue) {
+        Transaction transaction = new Gson().fromJson(requestParamValue, Transaction.class);
+        if (transaction.getSecId() == null) {
+            return "secid cannot be null";
+        }
+        transaction.setSecurity(repository.readSecurity(transaction.getSecId()).body);
+        return repository.updateTransaction(transaction).body;
+    }
+
+    @Override
+    String handleGetRequest(HttpExchange httpExchangeParameters) throws IOException {
+        String requestParameters = httpExchangeParameters.getRequestURI().getQuery();
+        if (requestParameters != null) {
+            String[] pair = requestParameters.split("=");
+            return pair[1];
+        } else return null;
     }
 
     @Override
@@ -32,17 +59,32 @@ public class UpdateTransactionHandler extends BaseHandler<String, String> implem
     }
 
     @Override
-    Response<String> requestRepository(String requestParameter) {
-        Transaction transaction = new Gson().fromJson(requestParameter, Transaction.class);
-        if (transaction.getSecId() == null) {
-            return new Response<>("secid cannot be null", Response.State.ERROR);
-        }
-        transaction.setSecurity(repository.readSecurity(transaction.getSecId()).body);
-        return repository.updateTransaction(transaction);
+    Response<Transaction> requestRepository(String requestParameter) {
+        return repository.readTransaction(Long.parseLong(requestParameter));
     }
 
     @Override
-    String presentResponse(Response<String> response) {
-        return response.body;
+    String presentResponse(Response<Transaction> response) {
+        if (response.state == Response.State.ERROR || response.body == null) {
+            return "Transaction not found";
+        }
+        return TableDate.TRANSACTION_TABLE_HEAD +
+                response.body.toStringXml() + TableDate.FINISH_TABLE + getFile();
+    }
+
+    private static String getFile() {
+        BufferedReader reader;
+        StringBuilder html = new StringBuilder();
+        try {
+            reader = new BufferedReader(new FileReader(new File("src/main/resources/transaction_update.html")));
+            String line = reader.readLine();
+            while (line != null) {
+                html.append(line).append("\n");
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return html.toString();
     }
 }

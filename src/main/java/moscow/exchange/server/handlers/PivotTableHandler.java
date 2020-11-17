@@ -2,66 +2,41 @@ package moscow.exchange.server.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import moscow.exchange.data.Response;
-import moscow.exchange.data.entity.Transaction;
-import moscow.exchange.data.repository.Repository;
 
-import java.util.HashMap;
-import java.util.List;
+import java.io.*;
 
-public class PivotTableHandler extends BaseHandler<HashMap<String, String>, List<Transaction>> implements HttpHandler {
-
-    private final Repository repository;
-
-    public PivotTableHandler(Repository repository) {
-        this.repository = repository;
-    }
-
+public class PivotTableHandler implements HttpHandler {
+    String htmlPage = getFile();
 
     @Override
-    HashMap<String, String> handleGetRequest(HttpExchange httpExchangeParameters) {
-        String httpParameters = httpExchangeParameters.getRequestURI().getQuery();
-        if (httpExchangeParameters != null) {
-            HashMap<String, String> parameters = new HashMap<>();
-            for (String parameter : httpParameters.split("&")) {
-                String[] pair = parameter.split("=");
-                if (pair.length > 1) {
-                    parameters.put(pair[0], pair[1]);
-                }
+    public void handle(HttpExchange exchange) throws IOException {
+        handleResponse(exchange);
+    }
+
+    private void handleResponse(HttpExchange httpExchange) throws IOException {
+        OutputStream outputStream = httpExchange.getResponseBody();
+        httpExchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
+        httpExchange.sendResponseHeaders(200, htmlPage.getBytes().length);
+        outputStream.write(htmlPage.getBytes());
+        outputStream.flush();
+        outputStream.close();
+    }
+
+    private static String getFile() {
+        BufferedReader reader;
+        StringBuilder html = new StringBuilder();
+        try {
+            reader = new BufferedReader(new FileReader(new File("src/main/resources/pivot_table.html")));
+            String line = reader.readLine();
+            while (line != null) {
+                html.append(line);
+                line = reader.readLine();
             }
-            return parameters;
-        } else return null;
-    }
-
-    @Override
-    HashMap<String, String> handlePostRequest(HttpExchange httpExchangeParameters) {
-        return null;
-    }
-
-    @Override
-    Response<List<Transaction>> requestRepository(HashMap<String, String> requestParameter) {
-        return repository.readTransactionWithFilterParameter(
-                requestParameter.get("sort_parameter"),
-                requestParameter.get("filter_parameter"),
-                requestParameter.get("filter_parameter_value"),
-                Integer.parseInt(requestParameter.get("limit")),
-                Integer.parseInt(requestParameter.get("offset"))
-
-        );
-    }
-
-    @Override
-    String presentResponse(Response<List<Transaction>> response) {
-        if (response.state == Response.State.ERROR) {
-            return "Transaction not found";
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        StringBuilder listTransaction = new StringBuilder();
-        listTransaction.append(TableDate.PIVOT_TABLE_HEAD);
-
-        for (Transaction t : response.body) {
-            listTransaction.append(t.pivotTableXml());
-        }
-        return listTransaction.append(TableDate.FINISH_TABLE).toString();
+        return html.toString();
     }
-
 }

@@ -6,7 +6,6 @@ import moscow.exchange.data.Response;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 
 public abstract class BaseHandler<T, K> implements HttpHandler {
     @Override
@@ -30,7 +29,7 @@ public abstract class BaseHandler<T, K> implements HttpHandler {
     abstract String presentResponse(Response<K> response);
 
 
-    private void handleResponse(HttpExchange httpExchange, String response) throws IOException {
+    protected void handleResponse(HttpExchange httpExchange, String response) throws IOException {
         OutputStream outputStream = httpExchange.getResponseBody();
         httpExchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
         httpExchange.sendResponseHeaders(200, response.getBytes().length);
