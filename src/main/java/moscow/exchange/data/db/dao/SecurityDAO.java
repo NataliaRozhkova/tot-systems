@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class SecurityDAO {
@@ -44,14 +45,17 @@ public class SecurityDAO {
         return new Response<>(securities, Response.State.SUCCESS);
     }
 
-    public Response<List<Security>> readWithSortParameters(String sortParameter) {
+    public Response<List<Security>> readWithSortParameters(String sortParameter, int limit, int offset) {
         session.beginTransaction();
         StringBuilder query = new StringBuilder("FROM Security ");
         query.append("ORDER BY ")
                 .append(sortParameter);
         Response<List<Security>> response;
         try {
-            List<Security> securities = session.createQuery(query.toString()).list();
+            List<Security> securities = session.createQuery(query.toString())
+                    .setFirstResult(offset)
+                    .setMaxResults(limit)
+                    .getResultList();
             response = new Response<>(securities, Response.State.SUCCESS);
             session.getTransaction().commit();
         } catch (PersistenceException e) {
@@ -76,6 +80,9 @@ public class SecurityDAO {
 
 
     public Response<Security> readBySecId(String secId) {
+        if (secId == null) {
+            return new Response<>(null, Response.State.ERROR);
+        }
         session.beginTransaction();
         Response<Security> response;
         try {
