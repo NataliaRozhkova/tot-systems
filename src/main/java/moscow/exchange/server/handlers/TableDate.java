@@ -3,7 +3,7 @@ package moscow.exchange.server.handlers;
 public class TableDate {
     public final static String TRANSACTION_TABLE_HEAD = "<table  border=\"1\">" +
             "<tr>\n" +
-            "<th>ID </th>\n"+
+            "<th>ID </th>\n" +
             "<th>BOARDID </th>\n" +
             "<th>TRADEDATE </th>\n" +
             "<th>SHORTNAME </th>\n" +
@@ -25,7 +25,7 @@ public class TableDate {
             "<th>ADMITTEDVALUE</th>\n" +
             "<th>WAVAL</th>\n" +
             "</tr>";
-    public final static String SECURITY_TABLE_HEAD = "<table  border=\"1\"> "+
+    public final static String SECURITY_TABLE_HEAD = "<table  border=\"1\"> " +
             "<tr>\n" +
             "<th>secid</th>\n" +
             "<th>shortname </th>\n" +
@@ -43,7 +43,18 @@ public class TableDate {
             "<th>primary_boardid </th>\n" +
             "<th>marketprice_boardid</th>\n" +
             "</tr>";
-//    public final static String PIVOT_TABLE_HEAD = ;
+    public final static String PIVOT_TABLE_HEAD = "<table  border=\"1\"> " +
+            "<tr>\n" +
+            "<th>secid </th>\n" +
+            "<th>regnumber </th>\n" +
+            "<th>name </th>\n" +
+            "<th>emitent_title </th>\n" +
+            "<th>tradedate </th>\n" +
+            "<th>numtrades </th>\n" +
+            "<th>open </th>\n" +
+            "<th>close </th>\n"+
+            "</tr>";
+
 
     public final static String FINISH_TABLE = "</table>";
 }
