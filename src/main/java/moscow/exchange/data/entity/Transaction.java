@@ -1,6 +1,5 @@
 package moscow.exchange.data.entity;
 
-import com.fasterxml.jackson.annotation.*;
 import com.google.gson.annotations.SerializedName;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -10,28 +9,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 public class Transaction {
 
-    //    private long id;
-//    private String boardId;
-//    private String tradeDate;
-//    private String shortName;
-//    private transient Security security;
-//    private String secId;
-//    private double numTrades;
-//    private double value;
-//    private double open;
-//    private double low;
-//    private double high;
-//    private double legalClosePrice;
-//    private double waPrice;
-//    private double close;
-//    private double volume;
-//    private double marketPrice2;
-//    private double marketPrice3;
-//    private double admittedQuote;
-//    private double mp2valtrd;
-//    private double marketPrice3TradesValue;
-//    private double admittedValue;
-//    private double waval;
     @SerializedName("id")
     private long id;
     @SerializedName("board_id")
@@ -140,7 +117,9 @@ public class Transaction {
     @XmlAttribute(name = "SECID")
     public void setSecurity(Security security) {
         this.security = security;
-        this.secId = security.getSecId();
+        if (security != null) {
+            this.secId = security.getSecId();
+        }
     }
 
     public void setId(long id) {
