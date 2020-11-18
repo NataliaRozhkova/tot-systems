@@ -26,10 +26,5 @@ public class Main {
 
         ExchangeHttpServer server = new ExchangeHttpServer(host, port, new Repository(new ExchangeDataSource()));
         server.start();
-
-
-
     }
-
-
 }
