@@ -9,11 +9,7 @@ import java.io.IOException;
 
 public class DBConfig {
 
-    private static final String CONFIG_FILE_PATH = "src/main/resources/db_config.txt";
     private static final String HIBERNATE_CONFIG_PATH = "src/main/resources/hibernate.cfg.xml";
-
-
-    public static DBConfig instance;
 
     @SerializedName("database_name")
     public String dbName;
@@ -27,12 +23,6 @@ public class DBConfig {
         this.password = password;
     }
 
-    public static DBConfig getInstance() {
-        if (instance == null) {
-            instance = new Gson().fromJson(FileReader.getFile(CONFIG_FILE_PATH), DBConfig.class);
-        }
-        return instance;
-    }
 
     public void setHibernateConfigFile() {
         try {
