@@ -326,23 +326,23 @@ public class Security {
 
     public String toStringXml() {
         StringBuilder securityString = new StringBuilder();
-        securityString.append("<tr>")
-                .append("<td>").append(secId).append("</td>")
-                .append("<td>").append(shortName).append("</td>")
-                .append("<td>").append(regNumber).append("</td>")
-                .append("<td>").append(name).append("</td>")
-                .append("<td>").append(isin).append("</td>")
-                .append("<td>").append(isTraded).append("</td>")
-                .append("<td>").append(emitentId).append("</td>")
-                .append("<td>").append(emitentTitle).append("</td>")
-                .append("<td>").append(emitentInn).append("</td>")
-                .append("<td>").append(emitentOkpo).append("</td>")
-                .append("<td>").append(gosreg).append("</td>")
-                .append("<td>").append(type).append("</td>")
-                .append("<td>").append(group).append("</td>")
-                .append("<td>").append(primaryBoardId).append("</td>")
-                .append("<td>").append(marketPriceBoardId).append("</td>")
-                .append("</tr>");
+        securityString.append("<tr>\n")
+                .append("<td>").append(secId).append("</td>\n")
+                .append("<td>").append(shortName).append("</td>\n")
+                .append("<td>").append(regNumber).append("</td>\n")
+                .append("<td>").append(name).append("</td>\n")
+                .append("<td>").append(isin).append("</td>\n")
+                .append("<td>").append(isTraded).append("</td>\n")
+                .append("<td>").append(emitentId).append("</td>\n")
+                .append("<td>").append(emitentTitle).append("</td>\n")
+                .append("<td>").append(emitentInn).append("</td>\n")
+                .append("<td>").append(emitentOkpo).append("</td>\n")
+                .append("<td>").append(gosreg).append("</td>\n")
+                .append("<td>").append(type).append("</td>\n")
+                .append("<td>").append(group).append("</td>\n")
+                .append("<td>").append(primaryBoardId).append("</td>\n")
+                .append("<td>").append(marketPriceBoardId).append("</td>\n")
+                .append("</tr>\n");
         return securityString.toString();
     }
 
