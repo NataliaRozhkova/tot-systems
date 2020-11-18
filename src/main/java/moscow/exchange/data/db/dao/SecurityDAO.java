@@ -7,7 +7,6 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SecurityDAO {
@@ -73,7 +72,7 @@ public class SecurityDAO {
                 "FROM Security WHERE emitent_title = :emitent_title "
         )
                 .setParameter("emitent_title", value);
-        ArrayList<Security> securities = (ArrayList<Security>) query.getResultList();
+        List<Security> securities =  query.getResultList();
         session.close();
         return new Response<>(securities, Response.State.SUCCESS);
 
