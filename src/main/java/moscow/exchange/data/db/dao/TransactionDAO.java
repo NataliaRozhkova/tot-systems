@@ -7,7 +7,6 @@ import org.hibernate.TransientPropertyValueException;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.PersistenceException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionDAO {
@@ -78,14 +77,14 @@ public class TransactionDAO {
         return response;
     }
 
-    public Response<List<Transaction>> readWithFilterParameter(String sortParameter, String filterParameter, String value, int limit, int offset) {
+    public Response<List<Transaction>> readWithFilterAndSortParameter(String sortParameter, String filterParameter, String value, int limit, int offset) {
         session.beginTransaction();
         StringBuilder query = new StringBuilder();
         query.append("SELECT i FROM Transaction i JOIN FETCH i.security");
         query.append(setFilterParameter(filterParameter, value));
         query.append(setSortParameter(sortParameter));
 
-        ArrayList<Transaction> transactions = (ArrayList<Transaction>) session.createQuery(query.toString(), Transaction.class)
+        List<Transaction> transactions = session.createQuery(query.toString(), Transaction.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
@@ -155,7 +154,7 @@ public class TransactionDAO {
         return response;
     }
 
-    public Response<String> delete(@NotNull long id) {
+    public Response<String> delete( long id) {
         session.beginTransaction();
         Transaction deleted = session.get(Transaction.class, id);
         session.getTransaction().commit();

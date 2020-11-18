@@ -108,7 +108,7 @@ public class ExchangeDataSource {
     }
 
     public Response<List<Transaction>> readTransactionWithFilterParameter(String sortParameter, String filterParameter, String value, int limit, int offset) {
-        return new TransactionDAO(sessionFactory.openSession()).readWithFilterParameter(sortParameter,filterParameter, value, limit, offset);
+        return new TransactionDAO(sessionFactory.openSession()).readWithFilterAndSortParameter(sortParameter,filterParameter, value, limit, offset);
     }
 
     public Response<List<Security>> readSecurityWithSortParameter(String sortParameter, int limit, int offset) {
