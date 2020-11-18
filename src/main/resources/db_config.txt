@@ -1,0 +1,5 @@
+{
+   "database_name":"moscow_exchange",
+   "user_name":"user1",
+   "password":"123"
+}
