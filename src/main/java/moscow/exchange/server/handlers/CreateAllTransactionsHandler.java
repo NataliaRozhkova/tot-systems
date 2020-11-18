@@ -57,15 +57,13 @@ public class CreateAllTransactionsHandler extends BaseHandler<String, String> im
 
     @Override
     Response<String> requestRepository(String requestParameter) throws IOException {
-
+        TransactionParser.removeArray();
         ArrayList<Transaction> transactions = new TransactionParser().parse(new File(requestParameter));
-
         return repository.createAllTransaction(transactions);
     }
 
     @Override
     String presentResponse(Response<String> response) {
-        TransactionParser.removeArray();
         return response.body;
     }
 }
