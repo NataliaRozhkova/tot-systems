@@ -55,7 +55,14 @@ public class UpdateSecurityHandler extends BaseHandler<String, Security> impleme
     }
 
     String requestRepositoryToUpdateSecurity(String requestParameter) {
-        return repository.updateSecurity(new Gson().fromJson(requestParameter, Security.class)).body;
+        Security security = new Gson().fromJson(requestParameter, Security.class);
+        if (security.getName() != null && security.getSecId() != null) {
+            return security.getName().matches("^[а-яА-ЯёЁ0-9 ]+$") ?
+                    repository.updateSecurity(security).body :
+                    " Error \n В поле name могут быть только кириллица, цифры и пробел";
+        } else {
+            return " Error \n Поля name и secid не могут быть пустыми";
+        }
     }
 
     @Override
