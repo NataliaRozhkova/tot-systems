@@ -1,8 +1,6 @@
 package moscow.exchange.data.db;
 
-import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
-import moscow.exchange.FileReader;
 
 import java.io.FileWriter;
 import java.io.IOException;
