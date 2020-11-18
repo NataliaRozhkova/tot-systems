@@ -128,9 +128,9 @@ public class TransactionDAO {
             return "";
         }
         if (filterParameter.equals("emitent_title")) {
-            return " WHERE i.security.emitentTitle  = \'" + value + "\'";
+            return " WHERE i.security.emitentTitle  LIKE \'%" + value + "%\'";
         } else {
-            return " WHERE i.tradeDate = \'" + value + "\'";
+            return " WHERE i.tradeDate LIKE \'%" + value + "%\'";
         }
     }
 
