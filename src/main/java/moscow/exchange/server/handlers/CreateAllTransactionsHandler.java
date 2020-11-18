@@ -6,7 +6,7 @@ import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Transaction;
 import moscow.exchange.data.entity.parser.TransactionParser;
 import moscow.exchange.data.repository.Repository;
-import moscow.exchange.server.FileReader;
+import moscow.exchange.FileReader;
 
 import java.io.File;
 import java.io.FileWriter;

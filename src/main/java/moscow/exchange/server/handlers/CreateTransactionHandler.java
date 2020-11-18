@@ -4,17 +4,12 @@ import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import moscow.exchange.data.Response;
-import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.entity.Transaction;
-import moscow.exchange.data.entity.parser.SecurityParser;
 import moscow.exchange.data.repository.Repository;
-import moscow.exchange.server.FileReader;
+import moscow.exchange.FileReader;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
 
 public class CreateTransactionHandler extends BaseHandler<String, String> implements HttpHandler {
 

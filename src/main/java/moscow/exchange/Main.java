@@ -1,8 +1,10 @@
 package moscow.exchange;
 
+import moscow.exchange.data.db.DBConfig;
 import moscow.exchange.data.db.ExchangeDataSource;
 import moscow.exchange.data.repository.Repository;
 import moscow.exchange.server.ExchangeHttpServer;
+import moscow.exchange.server.ServerConfig;
 
 import java.io.*;
 
@@ -10,21 +12,11 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        BufferedReader reader;
-        String host;
-        int port;
-
-        try {
-            reader = new BufferedReader(new FileReader(new File("src/main/resources/server_parameters.txt")));
-            host = reader.readLine();
-            port = Integer.parseInt(reader.readLine());
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            host = "localhost";
-            port = 8001;
-        }
-
-        ExchangeHttpServer server = new ExchangeHttpServer(host, port, new Repository(new ExchangeDataSource()));
+        ServerConfig config = ServerConfig.getInstance();
+        DBConfig dbConfig = DBConfig.getInstance();
+        dbConfig.setHibernateConfigFile();
+        ExchangeHttpServer server = new ExchangeHttpServer(config.host, config.port, new Repository(new ExchangeDataSource()));
         server.start();
+
     }
 }

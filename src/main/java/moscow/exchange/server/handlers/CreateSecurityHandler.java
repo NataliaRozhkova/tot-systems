@@ -6,7 +6,7 @@ import com.sun.net.httpserver.HttpHandler;
 import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.repository.Repository;
-import moscow.exchange.server.FileReader;
+import moscow.exchange.FileReader;
 
 import java.io.IOException;
 import java.io.InputStream;

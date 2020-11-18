@@ -1,7 +1,7 @@
 package moscow.exchange.server.handlers;
 
 import com.google.gson.Gson;
-import moscow.exchange.server.FileReader;
+import moscow.exchange.FileReader;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import moscow.exchange.data.Response;
