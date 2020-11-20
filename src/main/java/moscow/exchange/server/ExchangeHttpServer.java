@@ -35,8 +35,6 @@ public class ExchangeHttpServer {
         server.createContext("/transaction/list", new GetListTransactionHandler(repository));
         server.createContext("/pivot_table", new PivotTableHandler());
         server.createContext("/pivot_table/list", new GetPivotTableHandler(repository));
-        server.createContext("/test", new TestHandler());
-
         server.setExecutor(Executors.newFixedThreadPool(10));
     }
 
