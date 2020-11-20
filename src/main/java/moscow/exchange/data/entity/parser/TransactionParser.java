@@ -1,6 +1,5 @@
 package moscow.exchange.data.entity.parser;
 
-import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.entity.Transaction;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -32,6 +31,10 @@ public class TransactionParser {
         }
     }
 
+    public static void removeArray() {
+        transactionArrayList.clear();
+    }
+
     public ArrayList<Transaction> parse(final File file) {
         try {
             parser.parse(file, new TransactionParser.XMLHandler());
@@ -53,10 +56,6 @@ public class TransactionParser {
             e.printStackTrace();
         }
         return transactionArrayList;
-    }
-
-    public static void removeArray() {
-        transactionArrayList.clear();
     }
 
     private static class XMLHandler extends DefaultHandler {

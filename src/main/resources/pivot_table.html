@@ -1,4 +1,4 @@
-<html meta charset="UTF-8">
+<html charset="UTF-8" meta>
 <head>
     <title>Московская биржа</title>
 
@@ -11,26 +11,25 @@
     <form action="/pivot_table/list" method="get">
         <p><b>Вывести все операции по ценным бумагам</b><Br>
         <p>Выберите параметр для сортировки:<Br>
-            <input type="radio" name="sort_parameter" value="secid" > secid<Br>
-            <input type="radio" name="sort_parameter" value="regnumber" > regnumber<Br>
-            <input type="radio" name="sort_parameter" value="name" > name<Br>
-            <input type="radio" name="sort_parameter" value="emitent_title" > emitent_title<Br>
-            <input type="radio" name="sort_parameter" value="tradedate" > tradedate<Br>
-            <input type="radio" name="sort_parameter" value="numtrades" > numtrades<Br>
-            <input type="radio" name="sort_parameter" value="open" > open<Br>
-            <input type="radio" name="sort_parameter" value="close" > close<Br>
+            <input name="sort_parameter" type="radio" value="secid"> secid<Br>
+            <input name="sort_parameter" type="radio" value="regnumber"> regnumber<Br>
+            <input name="sort_parameter" type="radio" value="name"> name<Br>
+            <input name="sort_parameter" type="radio" value="emitent_title"> emitent_title<Br>
+            <input name="sort_parameter" type="radio" value="tradedate"> tradedate<Br>
+            <input name="sort_parameter" type="radio" value="numtrades"> numtrades<Br>
+            <input name="sort_parameter" type="radio" value="open"> open<Br>
+            <input name="sort_parameter" type="radio" value="close"> close<Br>
         </p>
         <p>Выберите параметр для фильтрации:<Br>
-            <input type="radio" name="filter_parameter" value="emitent_title" > emitent_title<Br>
-            <input type="radio" name="filter_parameter" value="tradedate" > tradedate<Br>
+            <input name="filter_parameter" type="radio" value="emitent_title"> emitent_title<Br>
+            <input name="filter_parameter" type="radio" value="tradedate"> tradedate<Br>
         </p>
-        <p><input type="text" name="filter_parameter_value" >Введите значение для параметра фильтрации emitent_title<Br>
-        <p><input type="date" name="filter_parameter_value" >Введите значение для параметра фильтрации tradedate<Br>
+        <p><input name="filter_parameter_value" type="text">Введите значение для параметра фильтрации emitent_title<Br>
+        <p><input name="filter_parameter_value" type="date">Введите значение для параметра фильтрации tradedate<Br>
 
 
-
-        <p><input type="number" name="limit" value="10">Количество выводимых данных<Br>
-        <p><input type="number" name="offset" value="0">Начальный элемент</p>
+        <p><input name="limit" type="number" value="10">Количество выводимых данных<Br>
+        <p><input name="offset" type="number" value="0">Начальный элемент</p>
 
 
         <p><input type="submit" value="Submit"></p>

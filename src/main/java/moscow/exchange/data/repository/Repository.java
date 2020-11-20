@@ -69,7 +69,7 @@ public class Repository {
     }
 
     public Response<List<Transaction>> readTransactionWithFilterParameter(String sortParameter, String filterParameter, String value, int limit, int offset) {
-        return dataSource.readTransactionWithFilterParameter(sortParameter, filterParameter,value,limit,offset);
+        return dataSource.readTransactionWithFilterParameter(sortParameter, filterParameter, value, limit, offset);
     }
 
     public Response<List<Security>> readSecurityWithSortParameter(String sortParameter, int limit, int offset) {

@@ -107,14 +107,6 @@ public class Transaction {
         return security;
     }
 
-    public String getSecId() {
-        return secId;
-    }
-
-    public void setSecId(String secId) {
-        this.secId = secId;
-    }
-
     @XmlAttribute(name = "SECID")
     public void setSecurity(Security security) {
         this.security = security;
@@ -123,12 +115,24 @@ public class Transaction {
         }
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getSecId() {
+        return secId;
+    }
+
+    public void setSecId(String secId) {
+        this.secId = secId;
     }
 
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getBoardId() {
+        return boardId;
     }
 
     @XmlAttribute(name = "BOARDID")
@@ -136,9 +140,17 @@ public class Transaction {
         this.boardId = boardId;
     }
 
+    public Date getTradeDate() {
+        return tradeDate;
+    }
+
     @XmlAttribute(name = "TRADEDATE")
     public void setTradeDate(Date tradeDate) {
         this.tradeDate = tradeDate;
+    }
+
+    public String getShortName() {
+        return shortName;
     }
 
     @XmlAttribute(name = "SHORTNAME")
@@ -146,9 +158,17 @@ public class Transaction {
         this.shortName = shortName;
     }
 
+    public double getNumTrades() {
+        return numTrades;
+    }
+
     @XmlAttribute(name = "NUMTRADES")
     public void setNumTrades(double numTrades) {
         this.numTrades = numTrades;
+    }
+
+    public double getValue() {
+        return value;
     }
 
     @XmlAttribute(name = "VALUE")
@@ -156,9 +176,17 @@ public class Transaction {
         this.value = value;
     }
 
+    public double getOpen() {
+        return open;
+    }
+
     @XmlAttribute(name = "OPEN")
     public void setOpen(double open) {
         this.open = open;
+    }
+
+    public double getLow() {
+        return low;
     }
 
     @XmlAttribute(name = "LOW")
@@ -166,9 +194,17 @@ public class Transaction {
         this.low = low;
     }
 
+    public double getHigh() {
+        return high;
+    }
+
     @XmlAttribute(name = "HIGH")
     public void setHigh(double high) {
         this.high = high;
+    }
+
+    public double getLegalClosePrice() {
+        return legalClosePrice;
     }
 
     @XmlAttribute(name = "LEGALCLOSEPRICE")
@@ -176,9 +212,17 @@ public class Transaction {
         this.legalClosePrice = legalClosePrice;
     }
 
+    public double getWaPrice() {
+        return waPrice;
+    }
+
     @XmlAttribute(name = "WAPRICE")
     public void setWaPrice(double waPrice) {
         this.waPrice = waPrice;
+    }
+
+    public double getClose() {
+        return close;
     }
 
     @XmlAttribute(name = "CLOSE")
@@ -186,9 +230,17 @@ public class Transaction {
         this.close = close;
     }
 
+    public double getVolume() {
+        return volume;
+    }
+
     @XmlAttribute(name = "VOLUME")
     public void setVolume(double volume) {
         this.volume = volume;
+    }
+
+    public double getMarketPrice2() {
+        return marketPrice2;
     }
 
     @XmlAttribute(name = "MARKETPRICE2")
@@ -196,9 +248,17 @@ public class Transaction {
         this.marketPrice2 = marketPrice2;
     }
 
+    public double getMarketPrice3() {
+        return marketPrice3;
+    }
+
     @XmlAttribute(name = "MARKETPRICE3")
     public void setMarketPrice3(double marketPrice3) {
         this.marketPrice3 = marketPrice3;
+    }
+
+    public double getAdmittedQuote() {
+        return admittedQuote;
     }
 
     @XmlAttribute(name = "ADMITTEDQUOTE")
@@ -206,9 +266,17 @@ public class Transaction {
         this.admittedQuote = admittedQuote;
     }
 
+    public double getMp2valtrd() {
+        return mp2valtrd;
+    }
+
     @XmlAttribute(name = "MP2VALTRD")
     public void setMp2valtrd(double mp2valtrd) {
         this.mp2valtrd = mp2valtrd;
+    }
+
+    public double getMarketPrice3TradesValue() {
+        return marketPrice3TradesValue;
     }
 
     @XmlAttribute(name = "MARKETPRICE3TRADESVALUE")
@@ -216,91 +284,22 @@ public class Transaction {
         this.marketPrice3TradesValue = marketPrice3TradesValue;
     }
 
+    public double getAdmittedValue() {
+        return admittedValue;
+    }
+
     @XmlAttribute(name = "ADMITTEDVALUE")
     public void setAdmittedValue(double admittedValue) {
         this.admittedValue = admittedValue;
     }
 
+    public double getWaval() {
+        return waval;
+    }
+
     @XmlAttribute(name = "WAVAL")
     public void setWaval(double waval) {
         this.waval = waval;
-    }
-
-    public String getBoardId() {
-        return boardId;
-    }
-
-    public Date getTradeDate() {
-        return tradeDate;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-
-    public double getNumTrades() {
-        return numTrades;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public double getOpen() {
-        return open;
-    }
-
-    public double getLow() {
-        return low;
-    }
-
-    public double getHigh() {
-        return high;
-    }
-
-    public double getLegalClosePrice() {
-        return legalClosePrice;
-    }
-
-    public double getWaPrice() {
-        return waPrice;
-    }
-
-    public double getClose() {
-        return close;
-    }
-
-    public double getVolume() {
-        return volume;
-    }
-
-    public double getMarketPrice2() {
-        return marketPrice2;
-    }
-
-    public double getMarketPrice3() {
-        return marketPrice3;
-    }
-
-    public double getAdmittedQuote() {
-        return admittedQuote;
-    }
-
-    public double getMp2valtrd() {
-        return mp2valtrd;
-    }
-
-    public double getMarketPrice3TradesValue() {
-        return marketPrice3TradesValue;
-    }
-
-    public double getAdmittedValue() {
-        return admittedValue;
-    }
-
-    public double getWaval() {
-        return waval;
     }
 
     @Override

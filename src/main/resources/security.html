@@ -1,4 +1,4 @@
-<html meta charset="UTF-8">
+<html charset="UTF-8" meta>
 <head>
     <title>Московская биржа</title>
 
@@ -13,36 +13,36 @@
 
     <form action="/security/read" method="get">
         <p><b>Вывести информацию по ценной бумаге</b><Br>
-        <p><input type="text" name="secid" required>Ввести тикер<Br>
+        <p><input name="secid" required type="text">Ввести тикер<Br>
         <p><input type="submit" value="Вывести"></p>
     </form>
 
     <form action="/security/update" method="get">
         <p><b>Обновить информацию по ценной бумаге</b><Br>
-        <p><input type="text" name="secid" required >Ввести тикер бумаги<Br>
+        <p><input name="secid" required type="text">Ввести тикер бумаги<Br>
         <p><input type="submit" value="Обновить"></p>
     </form>
 
     <form action="/security/delete" method="get">
         <p><b>Удалить бумагу по значению тикера</b><Br>
-        <p><input type="text" name="secid" required>Ввести тикер бумаги<Br>
+        <p><input name="secid" required type="text">Ввести тикер бумаги<Br>
         <p><input type="submit" value="Удалить"></p>
     </form>
 
     <form action="/security/history" method="get">
         <p><b>Вывести все операции по ценной бумаге</b><Br>
-        <p><input type="text" name="secid" required>Ввести тикер бумаги<Br>
+        <p><input name="secid" required type="text">Ввести тикер бумаги<Br>
         <p><input type="submit" value="Вывести"></p>
     </form>
 
     <form action="/security/list" method="get">
         <p><b>Вывести список ценных бумаг</b><Br>
         <p>Выберите параметр для сортировки:<Br>
-            <input type="radio" name="sort_parameter" value="secid" > Тикер (secid)<Br>
-            <input type="radio" name="sort_parameter" value="emitent_title"> Название эмитента (emitent_title)<Br>
+            <input name="sort_parameter" type="radio" value="secid"> Тикер (secid)<Br>
+            <input name="sort_parameter" type="radio" value="emitent_title"> Название эмитента (emitent_title)<Br>
         </p>
-        <p><input type="number" name="limit" value="10">Количество выводимых данных<Br>
-        <p><input type="number" name="offset" value="0">Начальный элемент</p>
+        <p><input name="limit" type="number" value="10">Количество выводимых данных<Br>
+        <p><input name="offset" type="number" value="0">Начальный элемент</p>
         <p><input type="submit" value="Submit"></p>
     </form>
 

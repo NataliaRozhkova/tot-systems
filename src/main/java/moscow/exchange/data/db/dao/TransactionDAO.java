@@ -4,6 +4,7 @@ import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Transaction;
 import org.hibernate.Session;
 import org.hibernate.TransientPropertyValueException;
+
 import javax.persistence.PersistenceException;
 import java.util.List;
 
@@ -57,7 +58,7 @@ public class TransactionDAO {
         session.beginTransaction();
         StringBuilder query = new StringBuilder();
         query.append("SELECT i FROM Transaction i JOIN FETCH i.security")
-        .append(setSortParameter(sortParameter));
+                .append(setSortParameter(sortParameter));
 
         Response<List<Transaction>> response;
         try {
@@ -152,7 +153,7 @@ public class TransactionDAO {
         return response;
     }
 
-    public Response<String> delete( long id) {
+    public Response<String> delete(long id) {
         session.beginTransaction();
         Transaction deleted = session.get(Transaction.class, id);
         session.getTransaction().commit();

@@ -6,7 +6,6 @@ import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Transaction;
 import moscow.exchange.data.repository.Repository;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 

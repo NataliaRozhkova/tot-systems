@@ -20,10 +20,25 @@ import java.util.List;
 
 public class ExchangeDataSource {
 
+    private final String url;
+
     private final SessionFactory sessionFactory;
 
-    public ExchangeDataSource() {
+    public ExchangeDataSource(String url) {
+
         this.sessionFactory = buildSessionFactory();
+        this.url = url;
+    }
+
+    private static SessionFactory buildSessionFactory() {
+        try {
+            StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+            Metadata metadata = new MetadataSources(standardRegistry).getMetadataBuilder().build();
+            return metadata.getSessionFactoryBuilder().build();
+        } catch (Throwable ex) {
+            System.err.println("Initial SessionFactory creation failed." + ex);
+            throw new ExceptionInInitializerError(ex);
+        }
     }
 
     public Response<String> createSecurity(final Security security) {
@@ -34,7 +49,7 @@ public class ExchangeDataSource {
         StringBuilder response = new StringBuilder();
         int count = 0;
         for (Security s : securities) {
-           if (createSecurity(s).state == Response.State.SUCCESS) count++;
+            if (createSecurity(s).state == Response.State.SUCCESS) count++;
         }
         return new Response<>("Добавлено записей " + count, Response.State.SUCCESS);
     }
@@ -58,7 +73,7 @@ public class ExchangeDataSource {
     public Response<String> createTransaction(final Transaction transaction) throws IOException {
         Security security = readSecurity(transaction.getSecId()).body;
         if (security == null) {
-            URL url = new URL("https://iss.moex.com/iss/securities.xml?q=" + transaction.getSecId());
+            URL url = new URL(this.url + transaction.getSecId());
             InputStream stream = url.openStream();
             ArrayList<Security> securities = new SecurityParser().parse(stream);
             stream.close();
@@ -66,10 +81,10 @@ public class ExchangeDataSource {
             security = readSecurity(transaction.getSecId()).body;
         }
         if (security == null && transaction.getSecId() == null) {
-            return  new Response<>("secid cannot be null", Response.State.ERROR);
+            return new Response<>("secid cannot be null", Response.State.ERROR);
         }
         if (security == null && transaction.getSecId() != null) {
-            return  new Response<>("security not found", Response.State.ERROR);
+            return new Response<>("security not found", Response.State.ERROR);
         }
         transaction.setSecurity(security);
         return new TransactionDAO(sessionFactory.openSession()).create(transaction);
@@ -77,7 +92,7 @@ public class ExchangeDataSource {
 
     public Response<String> createAllTransaction(List<Transaction> transactions) throws IOException {
         StringBuilder response = new StringBuilder();
-        int count =0;
+        int count = 0;
         for (Transaction t : transactions) {
             if (createTransaction(t).state == Response.State.SUCCESS) {
                 count++;
@@ -107,7 +122,7 @@ public class ExchangeDataSource {
     }
 
     public Response<List<Transaction>> readTransactionWithFilterParameter(String sortParameter, String filterParameter, String value, int limit, int offset) {
-        return new TransactionDAO(sessionFactory.openSession()).readWithFilterAndSortParameter(sortParameter,filterParameter, value, limit, offset);
+        return new TransactionDAO(sessionFactory.openSession()).readWithFilterAndSortParameter(sortParameter, filterParameter, value, limit, offset);
     }
 
     public Response<List<Security>> readSecurityWithSortParameter(String sortParameter, int limit, int offset) {
@@ -116,17 +131,5 @@ public class ExchangeDataSource {
 
     public Response<List<Security>> readSecurityWithFilterParameter(String value) {
         return new SecurityDAO(sessionFactory.openSession()).readWithFilterParameter(value);
-    }
-
-
-    private static SessionFactory buildSessionFactory() {
-        try {
-            StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
-            Metadata metadata = new MetadataSources(standardRegistry).getMetadataBuilder().build();
-            return metadata.getSessionFactoryBuilder().build();
-        } catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
     }
 }

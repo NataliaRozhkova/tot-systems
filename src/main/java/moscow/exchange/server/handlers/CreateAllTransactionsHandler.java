@@ -2,11 +2,11 @@ package moscow.exchange.server.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import moscow.exchange.FileReader;
 import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Transaction;
 import moscow.exchange.data.entity.parser.TransactionParser;
 import moscow.exchange.data.repository.Repository;
-import moscow.exchange.FileReader;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -15,7 +15,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 public class CreateAllTransactionsHandler extends BaseHandler<String, String> implements HttpHandler {
-    
+
     private static final String DOWNLOAD_XML_FILE_PATH = "src/main/resources/output.xml";
     private final String CREATE_ALL_TRANSACTIONS_HTML_PAGE_PATH = "src/main/resources/transaction_add_all.html";
 

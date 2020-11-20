@@ -1,5 +1,6 @@
 <html>
-<head><meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
     <title>Московская биржа</title>
 
 </head>
@@ -35,27 +36,28 @@
 
     }
 
+
 </script>
 <body>
 <div id="header">
     <h1> Добавить информацию по ценной бумаге</h1>
 
     <p><b>Ввести информацию по ценной бумаге</b><Br>
-    <p><input type="text" id="secid" placeholder="secid"> <Br>
-    <p><input type="text" id="shortname" placeholder="shortname"> <Br>
-    <p><input type="text" id="regnumber" placeholder="regnumber"> <Br>
-    <p><input type="text" id="name" pattern="^[а-яА-ЯёЁ0-9 ]+$" placeholder="name"> только кириллица, цифры и пробел<Br>
-    <p><input type="text" id="isin" placeholder="isin"><Br>
-    <p><input type="number" id="is_traded" placeholder="is_traded"><Br>
-    <p><input type="number" id="emitent_id" placeholder="emitent_id"><Br>
-    <p><input type="text" id="emitent_title" placeholder="emitent_title"><Br>
-    <p><input type="text" id="emitent_inn" placeholder="emitent_inn"><Br>
-    <p><input type="text" id="emitent_okpo" placeholder="emitent_okpo"><Br>
-    <p><input type="text" id="gosreg" placeholder="gosreg"><Br>
-    <p><input type="text" id="type" placeholder="type"><Br>
-    <p><input type="text" id="group" placeholder="group"><Br>
-    <p><input type="text" id="primary_boardid" placeholder="primary_boardid"> <Br>
-    <p><input type="text" id="marketprice_boardid" placeholder="marketprice_boardid"><Br>
+    <p><input id="secid" placeholder="secid" type="text"> <Br>
+    <p><input id="shortname" placeholder="shortname" type="text"> <Br>
+    <p><input id="regnumber" placeholder="regnumber" type="text"> <Br>
+    <p><input id="name" pattern="^[а-яА-ЯёЁ0-9 ]+$" placeholder="name" type="text"> только кириллица, цифры и пробел<Br>
+    <p><input id="isin" placeholder="isin" type="text"><Br>
+    <p><input id="is_traded" placeholder="is_traded" type="number"><Br>
+    <p><input id="emitent_id" placeholder="emitent_id" type="number"><Br>
+    <p><input id="emitent_title" placeholder="emitent_title" type="text"><Br>
+    <p><input id="emitent_inn" placeholder="emitent_inn" type="text"><Br>
+    <p><input id="emitent_okpo" placeholder="emitent_okpo" type="text"><Br>
+    <p><input id="gosreg" placeholder="gosreg" type="text"><Br>
+    <p><input id="type" placeholder="type" type="text"><Br>
+    <p><input id="group" placeholder="group" type="text"><Br>
+    <p><input id="primary_boardid" placeholder="primary_boardid" type="text"> <Br>
+    <p><input id="marketprice_boardid" placeholder="marketprice_boardid" type="text"><Br>
     <p>
         <button onclick="submitForm()"> Submit</button>
     </p>

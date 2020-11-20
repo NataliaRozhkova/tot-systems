@@ -46,7 +46,7 @@ public class SecurityDAO {
     public Response<List<Security>> readWithSortParameters(String sortParameter, int limit, int offset) {
         session.beginTransaction();
         StringBuilder query = new StringBuilder("FROM Security ");
-        if ( sortParameter != null ){
+        if (sortParameter != null) {
             query.append("ORDER BY ")
                     .append(sortParameter);
         }
@@ -72,7 +72,7 @@ public class SecurityDAO {
                 "FROM Security WHERE emitent_title = :emitent_title "
         )
                 .setParameter("emitent_title", value);
-        List<Security> securities =  query.getResultList();
+        List<Security> securities = query.getResultList();
         session.close();
         return new Response<>(securities, Response.State.SUCCESS);
 

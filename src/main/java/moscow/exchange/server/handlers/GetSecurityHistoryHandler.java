@@ -39,7 +39,7 @@ public class GetSecurityHistoryHandler extends BaseHandler<String, Security> imp
         }
         StringBuilder history = new StringBuilder();
         Security security = response.body;
-        history.append("<h2>").append(security.getSecId() ).append(" ").append(security.getName()).append("</h2>");
+        history.append("<h2>").append(security.getSecId()).append(" ").append(security.getName()).append("</h2>");
 
         history.append(TableDate.TRANSACTION_TABLE_HEAD);
 

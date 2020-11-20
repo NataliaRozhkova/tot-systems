@@ -18,12 +18,12 @@ public class GetListSecurityHandler extends BaseHandler<HashMap<String, String>,
     }
 
     @Override
-    HashMap<String, String> handleGetRequest(HttpExchange httpExchangeParameters)  {
+    HashMap<String, String> handleGetRequest(HttpExchange httpExchangeParameters) {
         return exchangeParametersFromRequest(httpExchangeParameters);
     }
 
     @Override
-    HashMap<String, String> handlePostRequest(HttpExchange httpExchangeParameters)  {
+    HashMap<String, String> handlePostRequest(HttpExchange httpExchangeParameters) {
         return null;
     }
 
@@ -42,7 +42,7 @@ public class GetListSecurityHandler extends BaseHandler<HashMap<String, String>,
         StringBuilder listSecurity = new StringBuilder();
         listSecurity.append(TableDate.SECURITY_TABLE_HEAD);
 
-        for (Security s : response.body){
+        for (Security s : response.body) {
             listSecurity.append(s.toStringXml());
         }
         return listSecurity.append(TableDate.FINISH_TABLE).toString();

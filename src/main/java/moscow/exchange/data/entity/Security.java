@@ -129,135 +129,132 @@ public class Security {
     public Security() {
     }
 
-    public void setTransactions(List<Transaction> transactions) {
-        this.transactions = transactions;
-    }
-
     public List<Transaction> getTransactions() {
         return transactions;
     }
 
-
-
-    public void setSecId(String secId) {
-        this.secId = secId;
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    public void setRegNumber(String regNumber) {
-        this.regNumber = regNumber;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setIsin(String isin) {
-        this.isin = isin;
-    }
-
-    public void setIsTraded(int isTraded) {
-        this.isTraded = isTraded;
-    }
-
-    public void setEmitentId(int emitentId) {
-        this.emitentId = emitentId;
-    }
-
-    public void setEmitentTitle(String emitentTitle) {
-        this.emitentTitle = emitentTitle;
-    }
-
-    public void setEmitentInn(String emitentInn) {
-        this.emitentInn = emitentInn;
-    }
-
-    public void setEmitentOkpo(String emitentOkpo) {
-        this.emitentOkpo = emitentOkpo;
-    }
-
-    public void setGosreg(String gosreg) {
-        this.gosreg = gosreg;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setGroup(String group) {
-        this.group = group;
-    }
-
-    public void setPrimaryBoardId(String primaryBoardId) {
-        this.primaryBoardId = primaryBoardId;
-    }
-
-    public void setMarketPriceBoardId(String marketPriceBoardId) {
-        this.marketPriceBoardId = marketPriceBoardId;
-    }
-
 
     public String getSecId() {
         return secId;
+    }
+
+    public void setSecId(String secId) {
+        this.secId = secId;
     }
 
     public String getShortName() {
         return shortName;
     }
 
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
     public String getRegNumber() {
         return regNumber;
+    }
+
+    public void setRegNumber(String regNumber) {
+        this.regNumber = regNumber;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getIsin() {
         return isin;
+    }
+
+    public void setIsin(String isin) {
+        this.isin = isin;
     }
 
     public int getIsTraded() {
         return isTraded;
     }
 
+    public void setIsTraded(int isTraded) {
+        this.isTraded = isTraded;
+    }
+
     public int getEmitentId() {
         return emitentId;
+    }
+
+    public void setEmitentId(int emitentId) {
+        this.emitentId = emitentId;
     }
 
     public String getEmitentTitle() {
         return emitentTitle;
     }
 
+    public void setEmitentTitle(String emitentTitle) {
+        this.emitentTitle = emitentTitle;
+    }
+
     public String getEmitentInn() {
         return emitentInn;
+    }
+
+    public void setEmitentInn(String emitentInn) {
+        this.emitentInn = emitentInn;
     }
 
     public String getEmitentOkpo() {
         return emitentOkpo;
     }
 
+    public void setEmitentOkpo(String emitentOkpo) {
+        this.emitentOkpo = emitentOkpo;
+    }
+
     public String getGosreg() {
         return gosreg;
+    }
+
+    public void setGosreg(String gosreg) {
+        this.gosreg = gosreg;
     }
 
     public String getType() {
         return type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getGroup() {
         return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 
     public String getPrimaryBoardId() {
         return primaryBoardId;
     }
 
+    public void setPrimaryBoardId(String primaryBoardId) {
+        this.primaryBoardId = primaryBoardId;
+    }
+
     public String getMarketPriceBoardId() {
         return marketPriceBoardId;
+    }
+
+    public void setMarketPriceBoardId(String marketPriceBoardId) {
+        this.marketPriceBoardId = marketPriceBoardId;
     }
 
     @Override

@@ -3,17 +3,17 @@ package moscow.exchange.server.handlers;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import moscow.exchange.FileReader;
 import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Transaction;
 import moscow.exchange.data.repository.Repository;
-import moscow.exchange.FileReader;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 public class CreateTransactionHandler extends BaseHandler<String, String> implements HttpHandler {
 
-    private final String CREATE_TRANSACTION_HTML_PAGE_PATH ="src/main/resources/transaction_add.html";
+    private final String CREATE_TRANSACTION_HTML_PAGE_PATH = "src/main/resources/transaction_add.html";
 
     private final Repository repository;
 

@@ -3,10 +3,10 @@ package moscow.exchange.server.handlers;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import moscow.exchange.FileReader;
 import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Security;
 import moscow.exchange.data.repository.Repository;
-import moscow.exchange.FileReader;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,13 +50,13 @@ public class CreateSecurityHandler extends BaseHandler<String, String> implement
     @Override
     Response<String> requestRepository(String requestParameter) {
         Security security = new Gson().fromJson(requestParameter, Security.class);
-        if (security.getName() != null && security.getSecId() != null ) {
+        if (security.getName() != null && security.getSecId() != null) {
             return security.getName().matches("^[а-яА-ЯёЁ0-9 ]+$") ?
                     repository.createSecurity(security) :
                     new Response<>(" Error \n В поле name могут быть только кириллица, цифры и пробел", Response.State.ERROR);
         } else
 
-        return new Response<>(" Error \n Поля name и secid не могут быть пустыми", Response.State.ERROR);
+            return new Response<>(" Error \n Поля name и secid не могут быть пустыми", Response.State.ERROR);
     }
 
     @Override

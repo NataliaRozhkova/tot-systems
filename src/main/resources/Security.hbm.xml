@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
     <class name="moscow.exchange.data.entity.Security" table="security">
-        <id name="secId" type="string" column="secid" />
+        <id name="secId" type="string" column="secid"/>
         <property name="shortName" column="shortname" type="string"/>
         <property name="regNumber" column="reg_number" type="string"/>
         <property name="name" column="name" type="string"/>
@@ -19,7 +19,8 @@
         <property name="group" column="security_group" type="string"/>
         <property name="primaryBoardId" column="primary_board_id" type="string"/>
         <property name="marketPriceBoardId" column="marketprice_boardid" type="string"/>
-        <bag name="transactions" table="transaction"  inverse="true" lazy="false" fetch="select" cascade="all-delete-orphan">
+        <bag name="transactions" table="transaction" inverse="true" lazy="false" fetch="select"
+             cascade="all-delete-orphan">
             <key>
                 <column name="secid" not-null="true"/>
             </key>

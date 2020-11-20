@@ -52,7 +52,7 @@ public class TableDate {
             "<th>tradedate </th>\n" +
             "<th>numtrades </th>\n" +
             "<th>open </th>\n" +
-            "<th>close </th>\n"+
+            "<th>close </th>\n" +
             "</tr>";
 
 

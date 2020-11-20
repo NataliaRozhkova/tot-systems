@@ -1,5 +1,6 @@
 <html>
-<head><meta charset="utf-8">
+<head>
+    <meta charset="utf-8">
     <title>Московская биржа</title>
 
 </head>
@@ -36,11 +37,10 @@
                 alert(this.responseText)
             }
         }
-        alert(data)
-
         xhr.send(data);
 
     }
+
 
 </script>
 <body>
@@ -48,27 +48,27 @@
     <h1> Обновить информацию об операции по ценной бумаге</h1>
 
     <p><b>Ввести новую информацию по ценной бумаге</b><Br>
-    <p><input type="number" id="id" placeholder="id"><Br>
-    <p><input type="text" id="board_id" placeholder="board_id"><Br>
-    <p><input type="date" id="trade_date" placeholder="trade_date"><Br>
-    <p><input type="text" id="shortname" placeholder="shortname"><Br>
-    <p><input type="text" id="secid" placeholder="secid"><Br>
-    <p><input type="number" id="num_trades" placeholder="num_trades"><Br>
-    <p><input type="number" id="value" placeholder="value"><Br>
-    <p><input type="number" id="open" placeholder="open"><Br>
-    <p><input type="number" id="low" placeholder="low"><Br>
-    <p><input type="number" id="high" placeholder="high"><Br>
-    <p><input type="number" id="legal_close_price" placeholder="legal_close_price"><Br>
-    <p><input type="number" id="wa_price" placeholder="wa_price"><Br>
-    <p><input type="number" id="close" placeholder="close"><Br>
-    <p><input type="number" id="volume" placeholder="volume"><Br>
-    <p><input type="number" id="market_price_2" placeholder="market_price_2"><Br>
-    <p><input type="number" id="market_price_3" placeholder="market_price_3"><Br>
-    <p><input type="number" id="admitted_quote" placeholder="admitted_quote"><Br>
-    <p><input type="number" id="mp_2_val_trd" placeholder="mp_2_val_trd"><Br>
-    <p><input type="number" id="market_price_3_trades_value" placeholder="market_price_3_trades_value"><Br>
-    <p><input type="number" id="admitted_value" placeholder="admitted_value"><Br>
-    <p><input type="number" id="wa_val" placeholder="wa_val"><Br>
+    <p><input id="id" placeholder="id" type="number"><Br>
+    <p><input id="board_id" placeholder="board_id" type="text"><Br>
+    <p><input id="trade_date" placeholder="trade_date" type="date"><Br>
+    <p><input id="shortname" placeholder="shortname" type="text"><Br>
+    <p><input id="secid" placeholder="secid" type="text"><Br>
+    <p><input id="num_trades" placeholder="num_trades" type="number"><Br>
+    <p><input id="value" placeholder="value" type="number"><Br>
+    <p><input id="open" placeholder="open" type="number"><Br>
+    <p><input id="low" placeholder="low" type="number"><Br>
+    <p><input id="high" placeholder="high" type="number"><Br>
+    <p><input id="legal_close_price" placeholder="legal_close_price" type="number"><Br>
+    <p><input id="wa_price" placeholder="wa_price" type="number"><Br>
+    <p><input id="close" placeholder="close" type="number"><Br>
+    <p><input id="volume" placeholder="volume" type="number"><Br>
+    <p><input id="market_price_2" placeholder="market_price_2" type="number"><Br>
+    <p><input id="market_price_3" placeholder="market_price_3" type="number"><Br>
+    <p><input id="admitted_quote" placeholder="admitted_quote" type="number"><Br>
+    <p><input id="mp_2_val_trd" placeholder="mp_2_val_trd" type="number"><Br>
+    <p><input id="market_price_3_trades_value" placeholder="market_price_3_trades_value" type="number"><Br>
+    <p><input id="admitted_value" placeholder="admitted_value" type="number"><Br>
+    <p><input id="wa_val" placeholder="wa_val" type="number"><Br>
     <p>
         <button onclick="submitForm()"> Submit</button>
     </p>
