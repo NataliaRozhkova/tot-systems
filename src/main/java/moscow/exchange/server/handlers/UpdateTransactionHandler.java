@@ -6,11 +6,13 @@ import com.sun.net.httpserver.HttpHandler;
 import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Transaction;
 import moscow.exchange.data.repository.Repository;
+import moscow.exchange.FileReader;
 
 import java.io.*;
 
 public class UpdateTransactionHandler extends BaseHandler<String, Transaction> implements HttpHandler {
 
+    private static final String UPDATE_TRANSACTION_HTML_PAGE_PATH = "src/main/resources/transaction_update.html";
     private final Repository repository;
 
 
@@ -69,22 +71,8 @@ public class UpdateTransactionHandler extends BaseHandler<String, Transaction> i
             return "Transaction not found";
         }
         return TableDate.TRANSACTION_TABLE_HEAD +
-                response.body.toStringXml() + TableDate.FINISH_TABLE + getFile();
+                response.body.toStringXml() + TableDate.FINISH_TABLE + FileReader.getFile(UPDATE_TRANSACTION_HTML_PAGE_PATH);
     }
 
-    private static String getFile() {
-        BufferedReader reader;
-        StringBuilder html = new StringBuilder();
-        try {
-            reader = new BufferedReader(new FileReader(new File("src/main/resources/transaction_update.html")));
-            String line = reader.readLine();
-            while (line != null) {
-                html.append(line).append("\n");
-                line = reader.readLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return html.toString();
-    }
+
 }

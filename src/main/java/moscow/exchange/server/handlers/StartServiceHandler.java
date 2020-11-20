@@ -8,12 +8,11 @@ import java.io.*;
 
 public class StartServiceHandler implements HttpHandler {
 
-    private static final String START_SERVICE_HTML_PAGE = "src/main/resources/start_service.html";
-
-    private static final String htmlPage = FileReader.getFile(START_SERVICE_HTML_PAGE);
+    private static final String START_SERVICE_HTML_PAGE_PATH = "src/main/resources/start_service.html";
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
+        String htmlPage = FileReader.getFile(START_SERVICE_HTML_PAGE_PATH);
         OutputStream outputStream = httpExchange.getResponseBody();
         httpExchange.getResponseHeaders().set("Content-Type", "text/html; charset=UTF-8");
         httpExchange.sendResponseHeaders(200, htmlPage.getBytes().length);

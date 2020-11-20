@@ -13,6 +13,8 @@ import java.io.InputStream;
 
 public class CreateSecurityHandler extends BaseHandler<String, String> implements HttpHandler {
 
+    private final String CREATE_SECURITY_HTML_PAGE_PATH = "src/main/resources/security_add.html";
+
     private final Repository repository;
 
     public CreateSecurityHandler(Repository repository) {
@@ -42,7 +44,7 @@ public class CreateSecurityHandler extends BaseHandler<String, String> implement
 
     @Override
     String handleGetRequest(HttpExchange httpExchangeParameters) {
-        return FileReader.getFile("src/main/resources/security_add.html");
+        return FileReader.getFile(CREATE_SECURITY_HTML_PAGE_PATH);
     }
 
     @Override

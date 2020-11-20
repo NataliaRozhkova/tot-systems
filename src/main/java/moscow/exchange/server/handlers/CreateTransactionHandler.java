@@ -13,11 +13,13 @@ import java.io.InputStream;
 
 public class CreateTransactionHandler extends BaseHandler<String, String> implements HttpHandler {
 
+    private final String CREATE_TRANSACTION_HTML_PAGE_PATH ="src/main/resources/transaction_add.html";
+
+    private final Repository repository;
+
     public CreateTransactionHandler(Repository repository) {
         this.repository = repository;
     }
-
-    private final Repository repository;
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
@@ -42,8 +44,7 @@ public class CreateTransactionHandler extends BaseHandler<String, String> implem
 
     @Override
     String handleGetRequest(HttpExchange httpExchangeParameters) {
-
-        return FileReader.getFile("src/main/resources/transaction_add.html");
+        return FileReader.getFile(CREATE_TRANSACTION_HTML_PAGE_PATH);
     }
 
     @Override

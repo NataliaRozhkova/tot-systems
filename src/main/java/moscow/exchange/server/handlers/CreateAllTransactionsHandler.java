@@ -16,8 +16,8 @@ import java.util.ArrayList;
 
 public class CreateAllTransactionsHandler extends BaseHandler<String, String> implements HttpHandler {
     
-    private static final String DOWNLOAD_XML_FILE = "src/main/resources/output.xml";
-    private final String CREATE_ALL_TRANSACTIONS_HTML_PAGE = "src/main/resources/transaction_add_all.html";
+    private static final String DOWNLOAD_XML_FILE_PATH = "src/main/resources/output.xml";
+    private final String CREATE_ALL_TRANSACTIONS_HTML_PAGE_PATH = "src/main/resources/transaction_add_all.html";
 
     private final Repository repository;
 
@@ -43,18 +43,18 @@ public class CreateAllTransactionsHandler extends BaseHandler<String, String> im
         InputStream stream = httpExchangeParameters.getRequestBody();
         String xml = new String(stream.readAllBytes());
         stream.close();
-        FileWriter writer = new FileWriter(DOWNLOAD_XML_FILE);
+        FileWriter writer = new FileWriter(DOWNLOAD_XML_FILE_PATH);
         writer.write("<document>");
         writer.write(xml.split("<document>")[1].split("</document>")[0]);
         writer.write("</document>");
         writer.flush();
         writer.close();
-        return DOWNLOAD_XML_FILE;
+        return DOWNLOAD_XML_FILE_PATH;
     }
 
     @Override
     String handleGetRequest(HttpExchange httpExchangeParameters) {
-        return FileReader.getFile(CREATE_ALL_TRANSACTIONS_HTML_PAGE);
+        return FileReader.getFile(CREATE_ALL_TRANSACTIONS_HTML_PAGE_PATH);
     }
 
     @Override
