@@ -4,8 +4,6 @@ import moscow.exchange.data.Response;
 import moscow.exchange.data.entity.Transaction;
 import org.hibernate.Session;
 import org.hibernate.TransientPropertyValueException;
-import org.jetbrains.annotations.NotNull;
-
 import javax.persistence.PersistenceException;
 import java.util.List;
 
@@ -83,7 +81,6 @@ public class TransactionDAO {
         query.append("SELECT i FROM Transaction i JOIN FETCH i.security");
         query.append(setFilterParameter(filterParameter, value));
         query.append(setSortParameter(sortParameter));
-
         List<Transaction> transactions = session.createQuery(query.toString(), Transaction.class)
                 .setFirstResult(offset)
                 .setMaxResults(limit)
@@ -128,9 +125,10 @@ public class TransactionDAO {
             return "";
         }
         if (filterParameter.equals("emitent_title")) {
-            return " WHERE i.security.emitentTitle  LIKE \'%" + value + "%\'";
+            return " WHERE lower(i.security.emitentTitle)  LIKE  lower(\'%" + value + "%\')";
         } else {
-            return " WHERE i.tradeDate LIKE \'%" + value + "%\'";
+
+            return " WHERE i.tradeDate = \'" + value + "\'";
         }
     }
 
