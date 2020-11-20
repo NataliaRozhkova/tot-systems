@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 @XmlRootElement(name = "row")
 
@@ -14,7 +15,7 @@ public class Transaction {
     @SerializedName("board_id")
     private String boardId;
     @SerializedName("trade_date")
-    private String tradeDate;
+    private Date tradeDate;
     @SerializedName("shortname")
     private String shortName;
     private transient Security security;
@@ -58,7 +59,7 @@ public class Transaction {
 
     public Transaction(long id,
                        String boardId,
-                       String tradeDate,
+                       Date tradeDate,
                        String shortName,
                        String secId,
                        double numTrades,
@@ -136,7 +137,7 @@ public class Transaction {
     }
 
     @XmlAttribute(name = "TRADEDATE")
-    public void setTradeDate(String tradeDate) {
+    public void setTradeDate(Date tradeDate) {
         this.tradeDate = tradeDate;
     }
 
@@ -229,7 +230,7 @@ public class Transaction {
         return boardId;
     }
 
-    public String getTradeDate() {
+    public Date getTradeDate() {
         return tradeDate;
     }
 

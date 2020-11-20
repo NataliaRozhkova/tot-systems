@@ -12,7 +12,10 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TransactionParser {
     private static ArrayList<Transaction> transactionArrayList = new ArrayList<>();
@@ -62,7 +65,16 @@ public class TransactionParser {
         public void startElement(String uri, String localName, String qName, Attributes attributes) {
             if (qName.equals("row")) {
                 String boardId = attributes.getValue("BOARDID");
-                String tradeDate = attributes.getValue("TRADEDATE");
+                String tradeDateStr = attributes.getValue("TRADEDATE");
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = new Date();
+                try {
+                    if (tradeDateStr != null) {
+                        date = format.parse(tradeDateStr);
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 String shortName = attributes.getValue("SHORTNAME");
                 String secId = attributes.getValue("SECID");
                 String numTradesStr = attributes.getValue("NUMTRADES");
@@ -100,7 +112,7 @@ public class TransactionParser {
                 if (boardId != null) {
                     transactionArrayList.add(new Transaction(0,
                             boardId,
-                            tradeDate,
+                            date,
                             shortName,
                             secId,
                             numTrades,
