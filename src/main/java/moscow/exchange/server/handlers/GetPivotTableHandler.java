@@ -20,17 +20,7 @@ public class GetPivotTableHandler extends BaseHandler<HashMap<String, String>, L
 
     @Override
     HashMap<String, String> handleGetRequest(HttpExchange httpExchangeParameters) {
-        String httpParameters = httpExchangeParameters.getRequestURI().getQuery();
-        if (httpExchangeParameters != null) {
-            HashMap<String, String> parameters = new HashMap<>();
-            for (String parameter : httpParameters.split("&")) {
-                String[] pair = parameter.split("=");
-                if (pair.length > 1) {
-                    parameters.put(pair[0], pair[1]);
-                }
-            }
-            return parameters;
-        } else return null;
+        return exchangeParametersFromRequest(httpExchangeParameters);
     }
 
     @Override
