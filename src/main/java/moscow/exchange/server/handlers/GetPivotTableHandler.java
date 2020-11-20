@@ -31,9 +31,9 @@ public class GetPivotTableHandler extends BaseHandler<HashMap<String, String>, L
     @Override
     Response<List<Transaction>> requestRepository(HashMap<String, String> requestParameter) {
         return repository.readTransactionWithFilterParameter(
-                requestParameter.get("sort_parameter"),
-                requestParameter.get("filter_parameter"),
-                requestParameter.get("filter_parameter_value"),
+                requestParameter.get("sort_by"),
+                requestParameter.get("filter_by"),
+                requestParameter.get("filter_value"),
                 Integer.parseInt(requestParameter.get("limit")),
                 Integer.parseInt(requestParameter.get("offset"))
 

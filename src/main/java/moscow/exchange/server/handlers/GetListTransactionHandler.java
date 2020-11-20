@@ -29,7 +29,7 @@ public class GetListTransactionHandler extends BaseHandler<HashMap<String, Strin
 
     @Override
     Response<List<Transaction>> requestRepository(HashMap<String, String> requestParameter) {
-        return repository.readTransactionWithSortParameter(requestParameter.get("sort_parameter"),
+        return repository.readTransactionWithSortParameter(requestParameter.get("sort_by"),
                 Integer.parseInt(requestParameter.get("limit")),
                 Integer.parseInt(requestParameter.get("offset")));
     }

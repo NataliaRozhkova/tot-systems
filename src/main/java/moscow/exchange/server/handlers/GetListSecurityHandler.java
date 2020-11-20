@@ -29,7 +29,7 @@ public class GetListSecurityHandler extends BaseHandler<HashMap<String, String>,
 
     @Override
     Response<List<Security>> requestRepository(HashMap<String, String> requestParameter) {
-        return repository.readSecurityWithSortParameter(requestParameter.get("sort_parameter"),
+        return repository.readSecurityWithSortParameter(requestParameter.get("sort_bys"),
                 Integer.parseInt(requestParameter.get("limit")),
                 Integer.parseInt(requestParameter.get("offset")));
     }
