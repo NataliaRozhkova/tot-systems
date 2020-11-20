@@ -11,8 +11,8 @@ import java.io.*;
 
 public class Main {
 
-    private static final String DB_CONFIG_FILE_PATH = "src/main/resources/db_config.txt";
-    private static final String SERVER_CONFIG_FILE_PATH = "src/main/resources/server_config.txt";
+    private static final String DB_CONFIG_FILE_PATH = "src/main/config/db_config.txt";
+    private static final String SERVER_CONFIG_FILE_PATH = "src/main/config/server_config.txt";
 
     public static void main(String[] args) throws IOException {
 
