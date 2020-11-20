@@ -10,7 +10,7 @@ public class PivotTableHandler implements HttpHandler {
 
     private static final String PIVOTE_TABLE_HTML_PAGE = "src/main/resources/pivot_table.html";
 
-    String htmlPage = FileReader.getFile(PIVOTE_TABLE_HTML_PAGE);
+    private static final String htmlPage = FileReader.getFile(PIVOTE_TABLE_HTML_PAGE);
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {

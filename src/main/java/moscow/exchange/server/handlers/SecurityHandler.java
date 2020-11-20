@@ -9,7 +9,7 @@ import java.io.*;
 public class SecurityHandler implements HttpHandler {
 
     private static final String SECURITY_HTML_PAGE = "src/main/resources/security.html";
-    String htmlPage = FileReader.getFile(SECURITY_HTML_PAGE);
+    private static final String htmlPage = FileReader.getFile(SECURITY_HTML_PAGE);
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
