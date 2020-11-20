@@ -13,6 +13,9 @@ import java.util.List;
 
 public class CreateAllSecurityHandler extends BaseHandler<String, String> implements HttpHandler {
 
+    private final String OUTPUT = "src/main/resources/output.xml";
+    private final String CREATE_ALL_SECURITY_HTML_PAGE = "src/main/resources/security_add_all.html";
+
     private final Repository repository;
 
     public CreateAllSecurityHandler(Repository repository) {
@@ -37,22 +40,21 @@ public class CreateAllSecurityHandler extends BaseHandler<String, String> implem
         InputStream stream = httpExchangeParameters.getRequestBody();
         String xml = new String(stream.readAllBytes());
         stream.close();
-        String path = "src/main/resources/output.xml";
-        FileWriter writer = new FileWriter(path);
+        FileWriter writer = new FileWriter(OUTPUT);
         String document = xml.split("<document>")[1].split("</document>")[0];
         writer.write(document);
         writer.flush();
         writer.close();
-        return path;
+        return OUTPUT;
     }
 
     @Override
     String handleGetRequest(HttpExchange httpExchangeParameters) {
-        return FileReader.getFile("src/main/resources/security_add_all.html");
+        return FileReader.getFile(CREATE_ALL_SECURITY_HTML_PAGE);
     }
 
     @Override
-    Response<String> requestRepository(String requestParameter)  {
+    Response<String> requestRepository(String requestParameter) {
         List<Security> securities = new SecurityParser().parse(new File(requestParameter));
         return repository.createAllSecurities(securities);
     }
