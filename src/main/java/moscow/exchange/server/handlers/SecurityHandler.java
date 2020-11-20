@@ -8,7 +8,7 @@ import java.io.*;
 
 public class SecurityHandler implements HttpHandler {
 
-    private final String SECURITY_HTML_PAGE = "src/main/resources/security.html";
+    private static final String SECURITY_HTML_PAGE = "src/main/resources/security.html";
     String htmlPage = FileReader.getFile(SECURITY_HTML_PAGE);
 
     @Override

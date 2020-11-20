@@ -8,7 +8,7 @@ import java.io.*;
 
 public class PivotTableHandler implements HttpHandler {
 
-    private final String PIVOTE_TABLE_HTML_PAGE = "src/main/resources/pivot_table.html";
+    private static final String PIVOTE_TABLE_HTML_PAGE = "src/main/resources/pivot_table.html";
 
     String htmlPage = FileReader.getFile(PIVOTE_TABLE_HTML_PAGE);
 
