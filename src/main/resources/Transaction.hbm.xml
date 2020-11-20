@@ -8,7 +8,7 @@
             <generator class="identity"/>
         </id>
         <property name="boardId" column="boardid" type="string"/>
-        <property name="tradeDate" column="tradeDate" type="string"/>
+        <property name="tradeDate" column="tradeDate" type="date"/>
         <property name="shortName" column="shortname" type="string"/>
         <many-to-one name="security"  column="secId"  class="moscow.exchange.data.entity.Security" not-null="true" />
         <property name="numTrades" column="numtrades" type="double"/>
