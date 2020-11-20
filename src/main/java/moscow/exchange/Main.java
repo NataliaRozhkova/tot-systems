@@ -11,9 +11,9 @@ import java.io.IOException;
 
 public class Main {
 
-    private static final String DB_CONFIG_FILE_PATH = "src/main/config/db_config.txt";
-    private static final String SERVER_CONFIG_FILE_PATH = "src/main/config/server_config.txt";
-    private static final String MOSCOW_EXCHANGE_SOURCE_URL = FileReader.getFile("src/main/config/url_config");
+    private static final String DB_CONFIG_FILE_PATH = "src/main/resources/config/db_config.json";
+    private static final String SERVER_CONFIG_FILE_PATH = "src/main/resources/config/server_config.json";
+    private static final String MOSCOW_EXCHANGE_SOURCE_URL = FileReader.getFile("src/main/resourcesconfig//url_config");
 
     public static void main(String[] args) throws IOException {
 
