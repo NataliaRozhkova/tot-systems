@@ -92,28 +92,34 @@ public class TransactionDAO {
     }
 
     private String setSortParameter(String sortParameter) {
+        return sortParameter != null ?
+                " ORDER BY " + sortParameterToColumn(sortParameter) :
+                "";
+    }
+
+    private String sortParameterToColumn(String sortParameter) {
         if (sortParameter == null) {
             return "";
         }
         switch (sortParameter) {
             case "id":
-                return " ORDER BY i.id";
+                return "i.id";
             case "secid":
-                return " ORDER BY i.security.secId";
+                return "i.security.secId";
             case "tradedate":
-                return " ORDER BY i.tradeDate";
+                return "i.tradeDate";
             case "open":
-                return " ORDER BY i.open";
+                return "i.open";
             case "close":
-                return " ORDER BY i.close";
+                return "i.close";
             case "numtrades":
-                return " ORDER BY i.numTrades";
+                return "i.numTrades";
             case "regnumber":
-                return " ORDER BY i.security.regNumber";
+                return "i.security.regNumber";
             case "name":
-                return " ORDER BY i.security.name";
+                return "i.security.name";
             case "emitent_title":
-                return " ORDER BY i.security.emitentTitle";
+                return "i.security.emitentTitle";
             default:
                 return "";
         }
