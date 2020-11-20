@@ -12,6 +12,8 @@ import java.io.*;
 
 public class UpdateSecurityHandler extends BaseHandler<String, Security> implements HttpHandler {
 
+    private static final String UPDATE_SECURITY_HTML_PAGE = "src/main/resources/security_update.html";
+
     private final Repository repository;
 
     public UpdateSecurityHandler(Repository repository) {
@@ -21,7 +23,7 @@ public class UpdateSecurityHandler extends BaseHandler<String, Security> impleme
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
 
-        String requestParamValue = null;
+        String requestParamValue;
         if ("GET".equals(httpExchange.getRequestMethod())) {
             requestParamValue = handleGetRequest(httpExchange);
             handleResponse(httpExchange, presentResponse(requestRepository(requestParamValue)));
@@ -71,7 +73,7 @@ public class UpdateSecurityHandler extends BaseHandler<String, Security> impleme
             return "Security not found";
         }
         return TableDate.SECURITY_TABLE_HEAD +
-                response.body.toStringXml() + TableDate.FINISH_TABLE + FileReader.getFile("src/main/resources/security_update.html");
+                response.body.toStringXml() + TableDate.FINISH_TABLE + FileReader.getFile(UPDATE_SECURITY_HTML_PAGE);
     }
 
 
