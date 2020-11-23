@@ -26,8 +26,4 @@ public class Main {
         server.start();
     }
 
-    public  static void stop() {
-        server.stop(0);
-    }
-
 }
