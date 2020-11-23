@@ -103,7 +103,6 @@ public class Security {
         this.primaryBoardId = primaryBoardId;
         this.marketPriceBoardId = marketPriceBoardId;
         this.transactions = transactions;
-
     }
 
     public Security(String secId) {
