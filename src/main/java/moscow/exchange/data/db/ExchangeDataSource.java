@@ -14,6 +14,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -70,14 +71,23 @@ public class ExchangeDataSource {
         return new SecurityDAO(sessionFactory.openSession()).update(security);
     }
 
-    public Response<String> createTransaction(final Transaction transaction) throws IOException {
+    public Response<String> createTransaction(final Transaction transaction) {
         Security security = readSecurity(transaction.getSecId()).body;
         if (security == null) {
-            URL url = new URL(this.url + transaction.getSecId());
-            InputStream stream = url.openStream();
-            ArrayList<Security> securities = new SecurityParser().parse(stream);
-            stream.close();
-            createAllSecurities(securities);
+            URL url = null;
+            try {
+                url = new URL(this.url + transaction.getSecId());
+                InputStream stream = url.openStream();
+                ArrayList<Security> securities = new SecurityParser().parse(stream);
+                stream.close();
+                createAllSecurities(securities);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                return new Response<>("Connection EROOR with https://iss.moex.com/iss/securities.xml", Response.State.ERROR);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return new Response<>("Connection EROOR with https://iss.moex.com/iss/securities.xml", Response.State.ERROR);
+            }
             security = readSecurity(transaction.getSecId()).body;
         }
         if (security == null && transaction.getSecId() == null) {
