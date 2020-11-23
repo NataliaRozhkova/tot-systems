@@ -23,7 +23,6 @@ public class CreateSecurityHandler extends BaseHandler<String, String> implement
 
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
-
         String requestParamValue;
         if ("GET".equals(httpExchange.getRequestMethod())) {
             requestParamValue = handleGetRequest(httpExchange);
