@@ -23,7 +23,7 @@
         let primary_boardid = document.querySelector('#primary_boardid');
         let marketprice_boardid = document.querySelector('#marketprice_boardid');
         let xhr = new XMLHttpRequest();
-        let url = '/security/add/new';
+        let url = '/security/add';
         xhr.open("POST", url, true);
         xhr.setRequestHeader('Content-type', 'application/json;charset=utf-8');
         var data = JSON.stringify({ "secid": secid.value == '' ? null : secid.value, "shortname": shortname.value == '' ? null : shortname.value, "regnumber": regnumber.value == '' ? null : regnumber.value, "name": name.value== '' ? null : name.value, "isin": isin.value== '' ? null : isin.value, "is_traded": is_traded.value== '' ? 0 : is_traded.value, "emitent_id": emitent_id.value== '' ? 0 : emitent_id.value, "emitent_title": emitent_title.value== '' ? null : emitent_title.value, "emitent_inn": emitent_inn.value== '' ? null : emitent_inn.value, "emitent_okpo": emitent_okpo.value== '' ? null : emitent_okpo.value, "gosreg": gosreg.value== '' ? null : gosreg.value, "type": type.value == '' ? null : type.value, "group": group.value== '' ? null : group.value, "primary_boardid": primary_boardid.value== '' ? null : primary_boardid.value, "marketprice_boardid": marketprice_boardid.value== '' ? null : marketprice_boardid.value, "history": [] });
