@@ -1,6 +1,5 @@
 package moscow.exchange.data.entity;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -72,7 +71,6 @@ public class Security {
         this.marketPriceBoardId = marketPriceBoardId;
     }
 
-    @JsonCreator
     public Security(String secId,
                     String shortname,
                     String regNumber,
