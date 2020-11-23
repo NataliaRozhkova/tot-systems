@@ -11,17 +11,23 @@ import java.io.IOException;
 
 public class Main {
 
-    private static final String DB_CONFIG_FILE_PATH = "src/main/resources/config/db_config.json";
-    private static final String SERVER_CONFIG_FILE_PATH = "src/main/resources/config/server_config.json";
-    private static final String MOSCOW_EXCHANGE_SOURCE_URL = FileReader.getFile("src/main/resources/config/url_config");
+    public static final String CONFIG_PATH = "src/main/resources/config/";
+    private static final String DB_CONFIG_FILE_PATH = CONFIG_PATH + "db_config.json";
+    private static final String SERVER_CONFIG_FILE_PATH = CONFIG_PATH + "server_config.json";
+    private static final String MOSCOW_EXCHANGE_SOURCE_URL = FileReader.getFile(CONFIG_PATH + "url_config.conf").trim();
+    private static ExchangeHttpServer server;
 
     public static void main(String[] args) throws IOException {
 
         ServerConfig config = new Gson().fromJson(FileReader.getFile(SERVER_CONFIG_FILE_PATH), ServerConfig.class);
         DBConfig dbConfig = new Gson().fromJson(FileReader.getFile(DB_CONFIG_FILE_PATH), DBConfig.class);
         dbConfig.setHibernateConfigFile();
-        ExchangeHttpServer server = new ExchangeHttpServer(config.host, config.port, new Repository(new ExchangeDataSource(MOSCOW_EXCHANGE_SOURCE_URL)));
+        server = new ExchangeHttpServer(config.host, config.port, new Repository(new ExchangeDataSource(MOSCOW_EXCHANGE_SOURCE_URL)));
         server.start();
-
     }
+
+    public  static void stop() {
+        server.stop(0);
+    }
+
 }

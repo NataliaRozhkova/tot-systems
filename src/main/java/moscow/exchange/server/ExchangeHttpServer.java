@@ -41,4 +41,8 @@ public class ExchangeHttpServer {
     public void start() {
         server.start();
     }
+
+    public  void  stop(int stop) {
+        server.stop(stop);
+    }
 }
